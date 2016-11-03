@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <button id="btn">按钮</button>
+    <script>
+
+        //通过按钮的id获得页面上的按钮
+        var button = document.getElementById("btn");
+
+        //为按钮添加addEventListener事件
+        button.addEventListener("click", hello);
+        button.addEventListener("click", world);
+
+        //移除addEventListener事件
+        button.removeEventListener("click", hello);
+
+        function hello()
+        {
+            alert("hello");
+        }
+
+        function world()
+        {
+            alert("world");
+        }
+    </script>
+</body>
+</html>

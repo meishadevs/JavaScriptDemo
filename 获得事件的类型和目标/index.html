@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <div>
+        <button id="button">按钮</button>
+    </div>
+    <script>
+        var button = document.getElementById("button");
+        button.addEventListener("click", demo);
+
+        function demo(event)
+        {
+            //获得事件的类型
+            alert(event.type);
+
+            //获得事件的目标(触发事件的元素)
+            alert(event.target);
+        }
+    </script>
+</body>
+</html>
