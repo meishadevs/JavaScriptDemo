@@ -1,0 +1,30 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>无标题文档</title>
+</head>
+<body>
+<div id="con">
+    <p>javascript</p>
+    <div>jQuery</div>
+    <h5>PHP</h5>
+</div>
+<script type="text/javascript">
+
+    //根据div节点的id从html中获得div节点
+    var x = document.getElementById("con");
+
+    //获得div节点下的所有子节点
+    var subnode = x.childNodes;
+
+    //在浏览器中显示div节点下的第一个子节点的类型
+    document.write("div节点下的第一个子节点的类型:" + subnode[0].nodeType + "<br/>");
+    document.write("div节点下的第一个子节点的类型:" + x.firstChild.nodeType + "<br/>");
+
+    //在浏览器中显示div节点下的最后一个子节点的类型
+    document.write("div节点下的最后一个子节点的类型:" + subnode[subnode.length - 1].nodeType + "<br/>");
+    document.write("div节点下的最后一个子节点的类型:" + x.lastChild.nodeType + "<br/>");
+</script>
+</body>
+</html>
