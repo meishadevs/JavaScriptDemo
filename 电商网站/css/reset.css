@@ -1,14 +1,15 @@
 @charset "utf-8";
 
 /* CSS Document */
-body,ul,ol,li,p,h1,h2,h3,h4,h5,h6,form,fieldset,table,td,img,div,dl,dt,dd,input {
+body, ul, ol, li, p, h1, h2, h3, h4, h5, h6, form, fieldset, table, td, img, div, dl, dt, dd, input, a {
     margin:0;
     padding:0;
 }
 
 body {
     font-size:12px;
-    font-family: "microsoft yahei";
+    font-family: "微软雅黑", "microsoft yahei";
+    height: 2000px;
 }
 
 img {
@@ -31,7 +32,7 @@ textarea {
 
 a {
     text-decoration:none;
-    color:#656565;
+    color:#666;
 }
 
 /*清浮动*/
@@ -53,6 +54,13 @@ a {
     float:right;
 }
 
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
 
 
 

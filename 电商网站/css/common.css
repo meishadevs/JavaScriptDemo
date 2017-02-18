@@ -1,73 +1,67 @@
-@charset "utf-8";
 
-/*版心*/
-.comWidth {
+/* 版心 */
+.inner-c {
     width: 1000px;
     margin: 0 auto;
 }
 
-.leftArea {
-    float: left;
-}
-
-.rightArea {
-    float: right;
-}
-
 /* 头部 s */
-.topBar {
-    height: 31px;
-    line-height: 31px;
-    background-color: #F7F7F7;
+
+/* 顶部通栏 */
+.header .topbar {
+    width: 100%;
+    height: 38px;
+    font: 12px/38px "宋体";
+    background-color: #f7f7f7;
+    color: #666;
 }
 
-.collection {
-    display: inline-block;
-    padding-left: 20px;
+/* 左侧区域 */
+.topbar .leftArea {
+    height: 38px;
+    padding-left: 17px;
     background: url("../images/icon/collection.jpg") left center no-repeat;
+}
+
+.topbar .leftArea a {
     font-weight: bold;
 }
 
-.rightArea a:hover {
-    color: red;
+.header .logoBar {
+    width: 100%;
+    height: 87px;
+    background-color: #1d7ad9;
 }
 
-.logoBar {
-    height: 85px;
-    background-color: #1D7AD9;
-}
-
-/* 网站的logo */
+/* 网站logo */
 .logoBar .logo {
-    padding-left: 40px;
-    padding-top: 13px;
+    padding-top: 14px;
 }
 
-.search_box {
-    width: 430px;
-    padding-top: 23px;
+/* 搜索 */
+.search-box {
+    height: 35px;
+    line-height: 35px;
+    margin-top: 23px;
     margin-left: 185px;
 }
 
 /* 搜索框 */
-.search_text {
+.search-box .search-text {
     width: 350px;
-    height: 35px;
-
-    /*\9表示兼容所有的IE浏览器*/
-    line-height: 35px\9;
+    height: 100%;
     padding: 0 5px 0 5px;
     background-color: #fff;
 }
 
 /* 搜索按钮 */
-.search_btn {
-    width: 70px;
-    height: 35px;
-    background-color: #FF8C00;
-    font-family: "microsoft yahei";
+.search-box .search-btn {
+    width: 69px;
+    height: 100%;
+    font-family: "微软雅黑", "microsoft yahei";
     font-size: 14px;
     color: #fff;
+    background-color: #ff8c00;
     cursor: pointer;
 }
 
@@ -76,96 +70,26 @@
     width: 145px;
     height: 35px;
     margin-top: 23px;
-    background-color: #FF8C00;
-    font: 14px/35px "microsoft yahei";
+    margin-left: 31px;
+    font: 14px/35px "微软雅黑", "microsoft yahei";
+    background-color: #ff8800;
     color: #fff;
-    cursor: pointer;
 }
 
 .shopCar .shopText {
     width: 47px;
-    height: 35px;
+    height: 100%;
     padding-left: 40px;
-    background: url("../images/icon/car.jpg") 10px center no-repeat ;
-    border-right: solid 1px #E27A00;
+    border-right: solid 1px #e27a00;
+    background: url("../images/icon/shopcar.jpg") 10px center no-repeat;
 }
 
 .shopCar .shopNum {
     width: 27px;
-    height: 35px;
+    height: 100%;
     padding-right: 29px;
-    border-left: solid 1px #FF9C01;
-    background: url("../images/icon/arrow.jpg") 33px center no-repeat;
     text-align: right;
-}
-
-/* 水平导航栏 */
-.navBox {
-    width: 100%;
-    height: 35px;
-    font-family: "microsoft yahei", "微软雅黑";
-    background-color: #1369C0;
-    color: #fff;
-}
-
-.navBox .shopClass h3 {
-    width: 150px;
-    height: 35px;
-    line-height: 35px;
-    padding-left: 40px;
-    background-color: #1369C0;
-    background: url("../images/icon/arrow-down.jpg") 148px center no-repeat;
-    font-size: 16px;
-}
-
-.navBox .nav li {
-    float: left;
-    width: 100px;
-    height: 35px;
-    line-height: 35px;
-    font-size: 14px;
-    text-align: center;
-    cursor: pointer;
-}
-
-.navBox .nav a {
-    color: #fff;
-}
-
-.navBox .nav li.active {
-    background-color: #4593FD;
-}
-
-/* 商品弹出列表 */
-.shopClass_show {
-    background-color: #4593FD;
-}
-
-.shopClass_item {
-    padding: 14px 10px;
-    border-bottom: solid 1px #3487F2;
-    border-top: solid 1px #5AA1FE;
-}
-
-.shopClass_item dt {
-    height: 20px;
-    background: url("../images/icon/sj.png") center right no-repeat;
-}
-
-.shopClass_item .fb {
-    font: 14px/1 "microsoft yahei", "微软雅黑";
-}
-
-.shopClass_item .aLink {
-    display: inline-block;
-    width: 48px;
-    height: 20px;
-    line-height: 20px;
-    text-align: center;
-    background: url("../images/icon/aLink.png") left center no-repeat;
-    text-decoration: underline;
-}
-.shopClass_item a{
-    color: #fff;
+    border-left: solid 1px #ff9c01;
+    background: url("../images/icon/arrow.jpg") 33px center no-repeat;
 }
 /* 头部 e */

@@ -5,25 +5,27 @@
     <title>电商网站</title>
     <link rel="stylesheet" type="text/css" href="css/reset.css"/>
     <link rel="stylesheet" type="text/css" href="css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="css/index.css"/>
 </head>
 <body>
+
     <!-- 头部 s -->
-    <div class="headerBar">
+    <div class="header">
 
         <!-- 顶部通栏 s -->
-        <div class="topBar">
+        <div class="topbar">
 
             <!-- 版心 s -->
-            <div class="comWidth">
+            <div class="inner-c clearfix">
 
                 <!-- 左侧区域 s -->
-                <div class="leftArea">
-                    <a href="javascript:;" class="collection">收藏慕课</a>
+                <div class="leftArea fl">
+                    <a href="javascript:;">收藏慕课</a>
                 </div>
                 <!-- 左侧区域 e -->
 
                 <!-- 右侧区域 s -->
-                <div class="rightArea">
+                <div class="rightArea fr">
                     欢迎来到慕课网
                     <a href="javascript:;">[登录]</a>
                     <a href="javascript:;">[免费注册]</a>
@@ -38,27 +40,27 @@
 
         <!-- logo通栏 s -->
         <div class="logoBar">
-
+            
             <!-- 版心 s -->
-            <div class="comWidth">
+            <div class="inner-c clearfix">
 
-                <!-- 网站logo s -->
+                <!-- 网站logo s-->
                 <div class="logo fl">
                     <a href="javascript:;">
-                        <img src="images/icon/logo.png" alt="慕课网"/>
+                        <img src="images/logo.png" alt=""/>
                     </a>
                 </div>
                 <!-- 网站logo e -->
 
-                <!-- 搜索框 s -->
-                <div class="search_box fl">
-                    <input class="search_text fl" type="text"/>
-                    <input class="search_btn fr" type="button" value="搜索"/>
+                <!-- 搜索 s -->
+                <div class="search-box fl clearfix">
+                    <input class="search-text fl" type="text"/>
+                    <input class="search-btn fl" type="button" value="搜索"/>
                 </div>
-                <!-- 搜索框 e -->
+                <!-- 搜索 e -->
 
                 <!-- 购物车 s -->
-                <div class="shopCar fr">
+                <div class="shopCar fl clearfix">
                     <span class="shopText fl">购物车</span>
                     <span class="shopNum fl">0</span>
                 </div>
@@ -69,91 +71,332 @@
             
         </div>
         <!-- logo通栏 e -->
-
-        <!-- 头部的水平导航栏 s -->
-        <div class="navBox">
-
-            <!-- 版心 s -->
-            <div class="comWidth">
-                <div class="shopClass fl">
-                    <h3>全部商品分类</h3>
-                    <div class="shopClass_show">
-                        <dl class="shopClass_item">
-                            <dt>
-                                <a class="fb" href="javascript:;">手机</a>
-                                <a href="javascript:;">数码</a>
-                                <a class="aLink" href="javascript:;">合约机</a>
-                            </dt>
-                            <dd>
-                                <a href="javascript:;">荣耀3X</a>
-                                <a href="javascript:;">单反</a>
-                                <a href="javascript:;">智能设备</a>
-                            </dd>
-                        </dl>
-                        <dl class="shopClass_item">
-                            <dt>
-                                <a href="javascript:;">电脑</a>
-                                <a href="javascript:;">硬件外设</a>
-                                <a href="javascript:;">装机宝</a>
-                            </dt>
-                            <dd>
-                                <a href="javascript:;">笔记本</a>
-                                <a href="javascript:;">台式机</a>
-                                <a href="javascript:;">超极本</a>
-                                <a href="javascript:;">平板</a>
-                            </dd>
-                        </dl>
-                        <dl class="shopClass_item">
-                            <dt>
-                                <a href="javascript:;">大家电</a>
-                            </dt>
-                            <dd>
-                                <a href="javascript:;">电视</a>
-                                <a href="javascript:;">空调</a>
-                                <a href="javascript:;">冰箱</a>
-                                <a href="javascript:;">洗衣机</a>
-                            </dd>
-                        </dl>
-                        <dl class="shopClass_item">
-                            <dt>
-                                <a href="javascript:;">厨房用品</a>
-                                <a href="javascript:;">生活电器</a>
-                            </dt>
-                            <dd>
-                                <a href="javascript:;">空气净化器</a>
-                                <a href="javascript:;">微波炉</a>
-                                <a href="javascript:;">取暖设备</a>
-                            </dd>
-                        </dl>
-                        <dl class="shopClass_item">
-                            <dt>
-                                <a href="javascript:;">食品</a>
-                                <a href="javascript:;">饮料</a>
-                                <a href="javascript:;">生鲜</a>
-                            </dt>
-                            <dd>
-                                <a href="javascript:;">进口</a>
-                                <a href="javascript:;">方便面</a>
-                                <a href="javascript:;">零食</a>
-                                <a href="javascript:;">保健</a>
-                            </dd>
-                        </dl>
-                    </div>
-                </div>
-                <ul class="nav fl">
-                    <li class="active"><a href="javascript:;">数码城</a></li>
-                    <li><a href="javascript:;">天黑黑</a></li>
-                    <li><a href="javascript:;">团购</a></li>
-                    <li><a href="javascript:;">发现</a></li>
-                    <li><a href="javascript:;">二手特卖</a></li>
-                    <li><a href="javascript:;">名品会</a></li>
-                </ul>
-            </div>
-            <!-- 版心 e -->
-        </div>
-        <!-- 头部的水平导航栏 e -->
-
     </div>
     <!-- 头部 e -->
+
+    <!-- 导航栏 s -->
+    <div class="navBar">
+
+        <!-- 版心 s -->
+        <div class="inner-c clearfix">
+
+            <!-- 商品分类 s -->
+            <div class="shopClass fl">
+                <h3>全部商品分类</h3>
+
+                <!-- 商品类别列表 s -->
+                <div class="shopClass-show">
+                    <dl class="shopClass-item">
+                        <dt>
+                            <a href="javascript:;">手机</a>
+                            <a href="javascript:;">数码</a>
+                            <a class="aLink" href="javascript:;">合约机</a>
+                        </dt>
+                        <dd>
+                            <a href="javascript:;">荣耀3X</a>
+                            <a href="javascript:;">单反</a>
+                            <a href="javascript:;">智能设备</a>
+                        </dd>
+                    </dl>
+                    <!--<dl class="shopClass-item active"></dl>-->
+                    <dl class="shopClass-item">
+                        <dt>
+                            <a href="javascript:;">电脑</a>
+                            <a href="javascript:;">硬件外设</a>
+                            <a class="aLink" href="javascript:;">装机宝</a>
+                        </dt>
+                        <dd>
+                            <a href="javascript:;">笔记本</a>
+                            <a href="javascript:;">台式机</a>
+                            <a href="javascript:;">超极本</a>
+                            <a href="javascript:;"> 平板</a>
+                        </dd>
+                    </dl>
+                    <dl class="shopClass-item">
+                        <dt>
+                            <a href="javascript:;">大家电</a>
+                        </dt>
+                        <dd>
+                            <a href="javascript:;">电视</a>
+                            <a href="javascript:;">空调</a>
+                            <a href="javascript:;">冰箱</a>
+                            <a href="javascript:;">洗衣机</a>
+                        </dd>
+                    </dl>
+                    <dl class="shopClass-item">
+                        <dt>
+                            <a href="javascript:;">厨房电器</a>
+                            <a href="javascript:;">生活电器</a>
+                        </dt>
+                        <dd>
+                            <a href="javascript:;">空气净化器</a>
+                            <a href="javascript:;">微波炉</a>
+                            <a href="javascript:;">取暖设备</a>
+                        </dd>
+                    </dl>
+                    <dl class="shopClass-item">
+                        <dt>
+                            <a href="javascript:;">食品</a>
+                            <a href="javascript:;">饮料</a>
+                            <a href="javascript:;">生鲜</a>
+                            <a class="aLink" href="javascript:;">粮油</a>
+                        </dt>
+                        <dd>
+                            <a href="javascript:;">进口</a>
+                            <a href="javascript:;">方便面</a>
+                            <a href="javascript:;">零食</a>
+                            <a href="javascript:;">保健</a>
+                        </dd>
+                    </dl>
+                </div>
+                <!-- 商品类别列表 e -->
+
+                <!-- 商品列表 s -->
+                <div class="shopClass-list hide">
+                    <dl class="shopList-item clearfix">
+                        <dt class="fl">电脑整机</dt>
+                        <dd>
+                            <a href="javascript:;">笔记本</a>
+                            <a href="javascript:;">超极本</a>
+                            <a href="javascript:;">上网本</a>
+                            <a href="javascript:;">平板电脑</a>
+                            <a href="javascript:;">台式机</a>
+                        </dd>
+                    </dl>
+                    <dl class="shopList-item clearfix">
+                        <dt class="fl">装机配件</dt>
+                        <dd>
+                            <a href="javascript:;">CPU</a>
+                            <a href="javascript:;">硬盘</a>
+                            <a href="javascript:;">SSD固态硬盘</a>
+                            <a href="javascript:;">内存</a>
+                            <a href="javascript:;">显示</a>
+                            <a href="javascript:;">器智能显示器</a>
+                            <a href="javascript:;">主板</a>
+                            <a href="javascript:;">显卡</a>
+                            <a href="javascript:;">机箱</a>
+                            <a href="javascript:;">电源</a>
+                            <a href="javascript:;">散热器</a>
+                            <a href="javascript:;">刻录机/光驱</a>
+                            <a href="javascript:;">声卡</a>
+                            <a href="javascript:;">拓展卡</a>
+                            <a href="javascript:;">服务器配件</a>
+                            <a href="javascript:;">DIY小附件</a>
+                        </dd>
+                    </dl>
+                    <dl class="shopList-item clearfix">
+                        <dt class="fl">整机附件</dt>
+                        <dd>
+                            <a href="javascript:;">电脑包</a>
+                            <a href="javascript:;">电脑桌</a>
+                            <a href="javascript:;">电池</a>
+                            <a href="javascript:;">电源适配器</a>
+                            <a href="javascript:;">贴膜</a>
+                            <a href="javascript:;">清洁用品</a>
+                            <a href="javascript:;">笔记本散热</a>
+                            <a href="javascript:;">USB扩展</a>
+                            <a href="javascript:;">平板配件</a>
+                            <a href="javascript:;">特色附件</a>
+                            <a href="javascript:;">插在网线/电话线</a>
+                            <a href="javascript:;">影音线材</a>
+                            <a href="javascript:;">电脑线材</a>
+                        </dd>
+                    </dl>
+                    <dl class="shopList-item clearfix">
+                        <dt class="fl">电脑外设</dt>
+                        <dd>
+                            <a href="javascript:;">鼠标</a>
+                            <a href="javascript:;">键盘</a>
+                            <a href="javascript:;">游戏外设</a>
+                            <a href="javascript:;">移动硬盘</a>
+                            <a href="javascript:;">摄像头</a>
+                            <a href="javascript:;">高清播放器</a>
+                            <a href="javascript:;">外置盒</a>
+                            <a href="javascript:;">移动硬盒包</a>
+                            <a href="javascript:;">手写板/绘图板</a>
+                        </dd>
+                    </dl>
+                    <dl class="shopList-item clearfix">
+                        <dt class="fl">网络设备</dt>
+                        <dd>
+                            <a href="javascript:;">路由器</a>
+                            <a href="javascript:;">网卡</a>
+                            <a href="javascript:;">3G无线上网</a>
+                            <a href="javascript:;">交换机 网络存储</a>
+                            <a href="javascript:;">布线工具</a>
+                            <a href="javascript:;">网络配件</a>
+                            <a href="javascript:;">正版软件</a>
+                        </dd>
+                    </dl>
+                    <dl class="shopList-item clearfix">
+                        <dt class="fl">音频设备</dt>
+                        <dd>
+                            <a href="javascript:;">音箱</a>
+                            <a href="javascript:;">耳机/耳麦</a>
+                            <a href="javascript:;">麦克风</a>
+                            <a href="javascript:;">声卡</a>
+                            <a href="javascript:;">音频附件</a>
+                            <a href="javascript:;">录音笔</a>
+                        </dd>
+                    </dl>
+
+                    <!-- 商品列表底部的两个按钮 s -->
+                    <div class="shopList-links">
+                        <a href="javascript:;">
+                            电脑整机频道<span></span>
+                        </a>
+                        <a href="javascript:;">
+                            硬件外设频道<span></span>
+                        </a>
+                    </div>
+                    <!-- 商品列表底部的两个按钮 e -->
+
+                </div>
+                <!-- 商品列表 e -->
+
+            </div>
+            <!-- 商品分类 e -->
+
+            <ul class="nav fl clearfix">
+                <li class="fl active"><a href="javascript:;">数码城</a></li>
+                <li class="fl"><a href="javascript:;">天黑黑</a></li>
+                <li class="fl"><a href="javascript:;">团购</a></li>
+                <li class="fl"><a href="javascript:;">发现</a></li>
+                <li class="fl"><a href="javascript:;">二手卖</a></li>
+                <li class="fl"><a href="javascript:;">名品会</a></li>
+            </ul>
+        </div>
+        <!-- 版心 e -->
+
+    </div>
+    <!-- 导航栏 e -->
+
+    <!-- banner部分 s -->
+    <div class="banner inner-c">
+        <div class="banner-bar">
+            <ul>
+                <li>
+                    <a href="javascript:;">
+                        <img src="images/banner/banner1.jpg" alt=""/>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <img src="images/banner/banner2.jpg" alt=""/>
+                    </a>
+                </li>
+            </ul>
+            <ol>
+                <li class="current">
+                    <a href="javascript:;"></a>
+                </li>
+                <li>
+                    <a href="javascript:;"></a>
+                </li>
+                <li>
+                    <a href="javascript:;"></a>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <!-- banner部分 e -->
+
+    <!-- 家用电脑 s -->
+    <div class="product inner-c">
+        <div class="product-title">
+            <div class="product-icon fl">
+                <img src="images/icon/product-icon.png" alt=""/>
+            </div>
+            <h3 class="fl">家用电器</h3>
+            <div class="more fr">
+                <a href="javascript:;">更多>></a>
+            </div>
+        </div>
+        <div class="product-content">
+            <div class="leftArea fl">
+                <a href="javascript:;">
+                    <img src="images/ad.jpg" alt=""/>
+                </a>
+            </div>
+            <div class="rightArea fr">
+                <ul class="productList-top">
+                    <li class="product-item fl">
+                        <a href="javascript:;">
+                            <img src="images/shouji.png" alt="手机"/>
+                        </a>
+                        <h3 class="product-name">HTC渴望8系列</h3>
+                        <p class="price">1899元</p>
+                    </li>
+                    <li class="product-item fl">
+                        <a href="javascript:;">
+                            <img src="images/shouji.png" alt="手机"/>
+                        </a>
+                        <h3 class="product-name">HTC渴望8系列</h3>
+                        <p class="price">1899元</p>
+                    </li>
+                    <li class="product-item fl">
+                        <a href="javascript:;">
+                            <img src="images/shouji.png" alt="手机"/>
+                        </a>
+                        <h3 class="product-name">HTC渴望8系列</h3>
+                        <p class="price">1899元</p>
+                    </li>
+                    <li class="product-item last fl">
+                        <a href="javascript:;">
+                            <img src="images/shouji.png" alt="手机"/>
+                        </a>
+                        <h3 class="product-name">HTC渴望8系列</h3>
+                        <p class="price">1899元</p>
+                    </li>
+                </ul>
+                <ol class="productList-bottom">
+                    <li class="product-item fl">
+                        <a class="fl" href="javascript:;">
+                            <img src="images/peidui.png" alt=""/>
+                        </a>
+                        <div class="product-info fl">
+                            <p class="name">NFC技术一碰轻松配对！接触屏幕</p>
+                            <p class="price">￥<span>149.00</span></p>
+                        </div>
+                    </li>
+                    <li class="product-item fl">
+                        <a href="javascript:;">
+                        </a>
+                    </li>
+                    <li class="product-item fl">
+                        <a href="javascript:;">
+                        </a>
+                    </li>
+                    <li class="product-item last fl">
+                        <a href="javascript:;">
+                        </a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <!-- 家用电脑 e -->
+
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
