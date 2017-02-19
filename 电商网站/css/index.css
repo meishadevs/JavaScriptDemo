@@ -1,44 +1,17 @@
+/* 电商网站首页的CSS样式 */
 
-/* 导航栏 s */
-.navBar {
-    width: 100%;
-    height: 35px;
-    background-color: #1369c0;
-}
+/* 商品分类导航栏 s */
 
-.shopClass {
+.shopClassBar {
+    height: 320px;
     position: relative;
-}
-
-.shopClass h3 {
-    width: 149px;
-    height: 35px;
-    padding-left: 40px;
-    background: url("../images/icon/arrow-down.png") 148px center no-repeat;
-    font: 16px/35px "微软雅黑", "microsoft yahei";
-    color: #fff;
-}
-
-.nav li {
-    width: 100px;
-    height: 35px;
-    font: 14px/35px "微软雅黑", "microsoft yahei";
-    text-align: center;
-}
-
-.nav li a {
-    color: #fff;
-}
-
-.nav li.active {
-    background-color: #4593fd;
 }
 
 .shopClass-show {
     width: 100%;
     position: absolute;
     left: 0;
-    top: 35px;
+    top: 0;
 }
 
 .shopClass-show .shopClass-item {
@@ -107,7 +80,7 @@
     padding: 0 20px 0 20px;
     border: solid 1px #e5e5e5;
     position: absolute;
-    top: 35px;
+    top: 0px;
     left: 189px;
 }
 
@@ -147,13 +120,15 @@
     margin-left: 8px;
     background: url("../images/icon/arrow.png") left center no-repeat;
 }
-/*导航栏 e */
+/* 商品分类导航栏 e */
+
 
 /* banner部分 s */
 .banner-bar {
     width: 811px;
     height: 320px;
     margin-left: 189px;
+    margin-top: -320px;
     position: relative;
     overflow: hidden;
 }
@@ -178,20 +153,19 @@
 
 .banner-bar ol li {
     float: left;
-    background-color: #fff;
+    width: 22px;
+    height: 6px;
     margin-right: 6px;
-    font-size: 0;
+    background-color: #fff;
+    text-indent: 2000em;
+    cursor: pointer;
+    overflow: hidden;
 }
 
 .banner-bar ol li.current {
     background-color: #ff7700;
 }
 
-.banner-bar ol a {
-    display: inline-block;
-    width: 22px;
-    height: 6px;
-}
 /* banner部分 e */
 
 /* 产品列表 s */
@@ -262,6 +236,7 @@
     text-align: center;
 }
 
+/* 商品的价格 */
 .productList-top .product-item .price {
     font-size: 14px;
     color: #ff7300;
@@ -275,14 +250,30 @@
 }
 
 .productList-bottom .product-item a {
-    width: 102px;
-    height: 116px;
+    padding: 20px 22px 0 31px;
 }
 
 .productList-bottom .product-item .product-info {
-    width: 97px;
-    height: 116px;
+    width: 83px;
+    padding-top: 32px;
 }
+
+/* 商品的名称 */
+.product-item .product-info .name {
+    font-family: "新宋体";
+}
+
+/* ￥符号 */
+.product-item .product-info .price {
+    font-size: 16px;
+    color: #666666;
+}
+
+/* 商品的价格 */
+.product-item .product-info .price span {
+    color: #000;
+}
+
 .rightArea li.last {
     width: 208px;
     border-right: none;

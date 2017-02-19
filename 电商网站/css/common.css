@@ -1,3 +1,4 @@
+/* 电商网站公共部分的CSS样式 */
 
 /* 版心 */
 .inner-c {
@@ -93,3 +94,86 @@
     background: url("../images/icon/arrow.jpg") 33px center no-repeat;
 }
 /* 头部 e */
+
+/* 导航栏 s */
+.navBar {
+    width: 100%;
+    height: 35px;
+    background-color: #1369c0;
+}
+
+.shopClass h3 {
+    width: 149px;
+    height: 35px;
+    padding-left: 40px;
+    background: url("../images/icon/arrow-down.png") 148px center no-repeat;
+    font: 16px/35px "微软雅黑", "microsoft yahei";
+    color: #fff;
+}
+
+.nav li {
+    width: 100px;
+    height: 35px;
+    font: 14px/35px "微软雅黑", "microsoft yahei";
+    text-align: center;
+}
+
+.nav li a {
+    color: #fff;
+}
+
+.nav li.active {
+    background-color: #4593fd;
+}
+/* 导航栏 e */
+
+/* 脚部 s */
+.footer {
+    width: 100%;
+    height: 224px;
+    margin-top: 40px;
+    background-color: #d4d4d4;
+    font-family: "新宋体";
+    color: #000;
+    text-align: center;
+}
+
+.footer .info {
+    padding-top: 56px;
+    padding-bottom: 12px;
+}
+
+.footer .copyright {
+    padding-bottom: 38px;
+}
+
+.footer .footerIcon {
+    font-size: 0;
+}
+
+.footer .footerIcon img {
+    display: inline-block;
+    margin-right: 26px;
+}
+
+.footer a {
+    color: #000;
+}
+/* 脚部 e */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

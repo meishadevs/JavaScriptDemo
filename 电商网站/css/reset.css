@@ -1,5 +1,7 @@
 @charset "utf-8";
 
+/* 重置标签的CSS样式 */
+
 /* CSS Document */
 body, ul, ol, li, p, h1, h2, h3, h4, h5, h6, form, fieldset, table, td, img, div, dl, dt, dd, input, a {
     margin:0;
@@ -9,7 +11,6 @@ body, ul, ol, li, p, h1, h2, h3, h4, h5, h6, form, fieldset, table, td, img, div
 body {
     font-size:12px;
     font-family: "微软雅黑", "microsoft yahei";
-    height: 2000px;
 }
 
 img {

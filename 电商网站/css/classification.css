@@ -1,0 +1,111 @@
+/*电商网站产品分类页的CSS样式*/
+
+.wrapper {
+    margin-top: 17px;
+}
+
+/* 左侧的部分 s */
+.wrapper .leftArea {
+    width: 183px;
+    border: solid 1px #d7d7d7;
+}
+
+.leftArea .product-title {
+    height: 34px;
+    font: bold 14px/34px "宋体";
+    text-align: center;
+    border-bottom: solid 1px #cdcdcd;
+}
+
+.leftArea .product-title a {
+    color: #555;
+}
+
+.leftArea .product-item {
+    padding: 10px 0 0 20px;
+    border-bottom: dotted 1px #cdcdcd;
+}
+
+.leftArea .product-item dt {
+    height: 30px;
+    font-family: "宋体";
+    font-weight: bold;
+    color: #555;
+}
+
+.leftArea .product-item dd {
+    font-size: 0;
+    font-family: "宋体";
+}
+.leftArea .product-item dd a {
+    display: inline-block;
+    width: 81px;
+    height: 25px;
+    font-size: 12px;
+    color: #555;
+}
+
+.leftArea dl.last {
+    border-bottom: none;
+}
+/* 左侧的部分 e */
+
+/* 右侧的banner s */
+.banner {
+    width: 811px;
+    height: 320px;
+    position: relative;
+    overflow: hidden;
+}
+
+.banner ul {
+    width: 1622px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.banner ul li {
+    float: left;
+}
+
+.banner ol {
+    position: absolute;
+    left: 50%;
+    bottom: 20px;
+    margin-left: -42px;
+}
+
+.banner ol li {
+    float: left;
+    width: 22px;
+    height: 6px;
+    margin-right: 6px;
+    background-color: #fff;
+    text-indent: -2000em;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.banner ol li.current {
+    background-color: #ff7700;
+}
+/* 右侧的banner e */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
