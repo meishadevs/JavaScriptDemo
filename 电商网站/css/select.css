@@ -1,0 +1,96 @@
+/*电商网站商品筛选页的CSS样式*/
+
+.wrapper {
+    margin-top: 17px;
+}
+
+/* 页面左侧 */
+.wrapper .leftArea {
+    width: 188px;
+    border: solid 1px #d7d7d7;
+}
+
+/* 商品分类导航 s */
+.leftArea .shopClassNav {
+    width: 100%;
+    background-color: #f3f3f3;
+}
+
+/* 商品分类导航中的标题 */
+.shopClassNav h3 {
+    height: 34px;
+    text-align: center;
+    color: #000;
+    font: bold 16px/34px "微软雅黑", "microsoft yahei";
+    border-bottom: solid 1px #d7d7d7;
+}
+
+.shopClassNav .shop-item {
+    padding: 4px 0 0 10px;
+    border-bottom: dotted 1px #d7d7d7;
+}
+
+.shopClassNav .last {
+    border-bottom: solid 1px #d7d7d7;
+}
+
+.shopClassNav .shop-item dt {
+    font: bold 14px/24px "微软雅黑", "microsoft yahei";
+}
+
+.shopClassNav .shop-item li {
+    height: 22px;
+    padding-left: 12px;
+    font-size: 12px;
+    font-family: "新宋体";
+}
+
+.shopClassNav .shop-item li a {
+    color: #555;
+}
+/* 商品分类 导航 e */
+
+/* 左侧的商品列表 s */
+.leftArea .shopList {
+    width: 100%;
+    padding-top: 10px;
+}
+
+.leftArea .shopList .shop-item {
+    margin-bottom: 20px;
+}
+
+.leftArea .shopList .shop-info {
+    width: 110px;
+    margin-left: 10px;
+    padding-top: 5px;
+    font-size: 14px;
+}
+
+.leftArea .shop-name a {
+    color: #999999
+}
+
+.leftArea .shop-price a {
+    color: #666;
+}
+/* 左侧的商品列表 e */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

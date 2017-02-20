@@ -9,6 +9,11 @@
 /* 头部 s */
 
 /* 顶部通栏 */
+
+.header {
+    height: 125px;
+}
+
 .header .topbar {
     width: 100%;
     height: 38px;
