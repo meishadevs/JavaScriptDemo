@@ -7,74 +7,74 @@
 
         window.onload = function()
         {
-            // Êó±êÒÆ¶¯¸Ä±ä±³¾°,¿ÉÒÔÍ¨¹ı¸øÃ¿ĞĞ°ó¶¨Êó±êÒÆÉÏÊÂ¼şºÍÊó±êÒÆ³ıÊÂ¼şÀ´¸Ä±äËùÔÚĞĞ±³¾°É«¡£
+            // é¼ æ ‡ç§»åŠ¨æ”¹å˜èƒŒæ™¯,å¯ä»¥é€šè¿‡ç»™æ¯è¡Œç»‘å®šé¼ æ ‡ç§»ä¸Šäº‹ä»¶å’Œé¼ æ ‡ç§»é™¤äº‹ä»¶æ¥æ”¹å˜æ‰€åœ¨è¡ŒèƒŒæ™¯è‰²ã€‚
 
 
         }
 
-        //¸Ä±ä±³¾°ÑÕÉ«
+        //æ”¹å˜èƒŒæ™¯é¢œè‰²
         function changeColor(node)
         {
             node.style.backgroundColor = "#f2f2f2";
         }
 
-        //»Ö¸´Ô­À´µÄÑÕÉ«
+        //æ¢å¤åŸæ¥çš„é¢œè‰²
         function recoverColor(node)
         {
             node.style.backgroundColor = "#fff";
         }
 
-        //É¾³ı±í¸ñÖĞµÄÒ»ĞĞ
-        //node±íÊ¾É¾³ı°´Å¥ËùÔÚµÄ½Úµã
+        //åˆ é™¤è¡¨æ ¼ä¸­çš„ä¸€è¡Œ
+        //nodeè¡¨ç¤ºåˆ é™¤æŒ‰é’®æ‰€åœ¨çš„èŠ‚ç‚¹
         function deleteTable(node)
         {
-            //»ñµÃtr½Úµã
+            //è·å¾—trèŠ‚ç‚¹
             tr = node.parentNode.parentNode;
 
-            //±éÀútr½ÚµãÏÂÃæµÄ×Ó½Úµã
+            //éå†trèŠ‚ç‚¹ä¸‹é¢çš„å­èŠ‚ç‚¹
             for(var i = tr.childNodes.length - 1; i >= 0; i--)
             {
-                //É¾³ıtr½ÚµãÏÂµÄ×Ó½Úµã
+                //åˆ é™¤trèŠ‚ç‚¹ä¸‹çš„å­èŠ‚ç‚¹
                 tr.removeChild(tr.childNodes[i]);
             }
         }
 
-        // ±àĞ´Ò»¸öº¯Êı£¬¹©Ìí¼Ó°´Å¥µ÷ÓÃ£¬¶¯Ì¬ÔÚ±í¸ñµÄ×îºóÒ»ĞĞÌí¼Ó×Ó½Úµã£»
+        // ç¼–å†™ä¸€ä¸ªå‡½æ•°ï¼Œä¾›æ·»åŠ æŒ‰é’®è°ƒç”¨ï¼ŒåŠ¨æ€åœ¨è¡¨æ ¼çš„æœ€åä¸€è¡Œæ·»åŠ å­èŠ‚ç‚¹ï¼›
         function addTable()
         {
-            //»ñµÃ±í¸ñÖĞµÄtable±êÇ©
+            //è·å¾—è¡¨æ ¼ä¸­çš„tableæ ‡ç­¾
             var tbody = document.getElementsByTagName("tbody")[0];
            // document.write(table[0].childNodes[1].nodeName);
 
-            //´´½¨Ò»¸ötr±êÇ©
+            //åˆ›å»ºä¸€ä¸ªtræ ‡ç­¾
             var tr = document.createElement("tr");
 
-            //´´½¨td±êÇ©
+            //åˆ›å»ºtdæ ‡ç­¾
             var td1 = document.createElement("td");
             td1.innerHTML = "xh003";
 
-            //´´½¨td±êÇ©
+            //åˆ›å»ºtdæ ‡ç­¾
             var td2 = document.createElement("td");
-            td2.innerHTML = "ÕÔĞ¡»ª";
+            td2.innerHTML = "èµµå°å";
 
-            //´´½¨td±êÇ©
+            //åˆ›å»ºtdæ ‡ç­¾
             var td3 = document.createElement("td");
 
 
-            //´´½¨Ò»¸öa±êÇ©
+            //åˆ›å»ºä¸€ä¸ªaæ ‡ç­¾
             var a = document.createElement("a");
             a.href = "javascript:;";
-            a.innerHTML = "É¾³ı";
+            a.innerHTML = "åˆ é™¤";
 
-            //½«trÌí¼Óµ½tbodyÖĞ
+            //å°†træ·»åŠ åˆ°tbodyä¸­
             tbody.appendChild(tr);
 
-            //½«tdÌí¼Óµ½trÖĞ
+            //å°†tdæ·»åŠ åˆ°trä¸­
             tr.appendChild(td1);
             tr.appendChild(td2);
             tr.appendChild(td3);
 
-            //½«a±êÇ©Ìí¼Óµ½td±êÇ©ÖĞ
+            //å°†aæ ‡ç­¾æ·»åŠ åˆ°tdæ ‡ç­¾ä¸­
             td3.appendChild(a);
         }
 
@@ -83,24 +83,24 @@
 <body>
     <table border="1" width="50%" id="table">
         <tr onmouseover="changeColor(this)" onmouseout="recoverColor(this)">
-            <th>Ñ§ºÅ</th>
-            <th>ĞÕÃû</th>
-            <th>²Ù×÷</th>
+            <th>å­¦å·</th>
+            <th>å§“å</th>
+            <th>æ“ä½œ</th>
         </tr>
 
         <tr onmouseover="changeColor(this)" onmouseout="recoverColor(this)">
             <td>xh001</td>
-            <td>ÍõĞ¡Ã÷</td>
-            <td><a href="javascript:;" onclick="deleteTable(this)">É¾³ı</a></td>   <!--ÔÚÉ¾³ı°´Å¥ÉÏÌí¼Óµã»÷ÊÂ¼ş  -->
+            <td>ç‹å°æ˜</td>
+            <td><a href="javascript:;" onclick="deleteTable(this)">åˆ é™¤</a></td>   <!--åœ¨åˆ é™¤æŒ‰é’®ä¸Šæ·»åŠ ç‚¹å‡»äº‹ä»¶  -->
         </tr>
 
         <tr onmouseover="changeColor(this)" onmouseout="recoverColor(this)">
             <td>xh002</td>
-            <td>ÁõĞ¡·¼</td>
-            <td><a href="javascript:;" onclick="deleteTable(this)">É¾³ı</a></td>   <!--ÔÚÉ¾³ı°´Å¥ÉÏÌí¼Óµã»÷ÊÂ¼ş  -->
+            <td>åˆ˜å°èŠ³</td>
+            <td><a href="javascript:;" onclick="deleteTable(this)">åˆ é™¤</a></td>   <!--åœ¨åˆ é™¤æŒ‰é’®ä¸Šæ·»åŠ ç‚¹å‡»äº‹ä»¶  -->
         </tr>
 
     </table>
-    <input type="button" value="Ìí¼ÓÒ»ĞĞ" onclick="addTable()"/>   <!--ÔÚÌí¼Ó°´Å¥ÉÏÌí¼Óµã»÷ÊÂ¼ş  -->
+    <input type="button" value="æ·»åŠ ä¸€è¡Œ" onclick="addTable()"/>   <!--åœ¨æ·»åŠ æŒ‰é’®ä¸Šæ·»åŠ ç‚¹å‡»äº‹ä»¶  -->
 </body>
 </html>
