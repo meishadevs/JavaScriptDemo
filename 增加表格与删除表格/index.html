@@ -4,85 +4,116 @@
  <title> new document </title>
  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
  <script type="text/javascript">
-     window.onload = function()
-     {
-         // 鼠标移动改变背景,可以通过给每行绑定鼠标移上事件和鼠标移除事件来改变所在行背景色。
-     }
+      window.onload = function () {
+
+          //改变背景颜色
+          changeColor();
+
+          //删除表格中一行数据
+          deleteTable();
+
+          //向表格中添加一行数据
+          var add = document.getElementById('add');
+          add.onclick = function () {
+              addTable();
+          }
+      }
+
      //改变背景颜色
-     function changeColor(node)
-     {
-         node.style.backgroundColor = "#f2f2f2";
+     function changeColor() {
+
+          //获得所有tr标签
+          var trs = document.getElementsByTagName('tr');
+
+          //遍历所有tr标签
+          for (var i = 0; i < trs.length; i++) {
+
+              //当鼠标放在tr标签上
+              trs[i].onmouseover = function () {
+
+                  //改变tr标签的颜色
+                  this.style.backgroundColor = '#f2f2f2';
+              }
+
+              //当鼠标离开tr标签
+              trs[i].onmouseout = function () {
+                  this.style.backgroundColor = '#fff';
+              }
+          }
      }
-     //恢复原来的颜色
-     function recoverColor(node)
-     {
-         node.style.backgroundColor = "#fff";
-     }
-     //删除表格中的一行
-     //node表示删除按钮所在的节点
-     function deleteTable(node)
-     {
-         //获得tr节点
-         tr = node.parentNode.parentNode;
-         //遍历tr节点下面的子节点
-         for(var i = tr.childNodes.length - 1; i >= 0; i--)
-         {
-             //删除tr节点下的子节点
-             tr.removeChild(tr.childNodes[i]);
+
+      //删除表格中的一行数据
+     function deleteTable() {
+
+          //获得所有的tr标签
+         var trs = document.getElementsByTagName('tr');
+
+         //获得tbody标签
+         var tbody = document.getElementsByTagName('tbody')[0];
+
+         //遍历所有tr标签
+         for (var i = 1; i < trs.length; i++) {
+
+             //获得tr标签下的a标签
+             var a = trs[i].children[2].children[0];
+
+             //给a标签添加一个点击事件
+             a.onclick = function () {
+                 tbody.removeChild(this.parentNode.parentNode);
+             }
          }
      }
-     // 编写一个函数，供添加按钮调用，动态在表格的最后一行添加子节点；
-     function addTable()
-     {
-         //获得表格中的table标签
+
+     //向表格中添加一行数据
+     function addTable() {
+         //获得表格中的tbody标签
          var tbody = document.getElementsByTagName("tbody")[0];
-         // document.write(table[0].childNodes[1].nodeName);
+
          //创建一个tr标签
          var tr = document.createElement("tr");
+         tbody.appendChild(tr);
+
          //创建td标签
          var td1 = document.createElement("td");
-         td1.innerHTML = "xh003";
-         //创建td标签
          var td2 = document.createElement("td");
-         td2.innerHTML = "赵小华";
-         //创建td标签
          var td3 = document.createElement("td");
+         tr.appendChild(td1);
+         tr.appendChild(td2);
+         tr.appendChild(td3);
+
+         //向td标签中添加内容
+         td1.innerHTML = "xh003";
+         td2.innerHTML = "赵小华";
+
          //创建一个a标签
          var a = document.createElement("a");
          a.href = "javascript:;";
          a.innerHTML = "删除";
-         //将tr添加到tbody中
-         tbody.appendChild(tr);
-         //将td添加到tr中
-         tr.appendChild(td1);
-         tr.appendChild(td2);
-         tr.appendChild(td3);
-         //将a标签添加到td标签中
          td3.appendChild(a);
+
+         changeColor();
+         deleteTable();
      }
  </script>
 </head>
 <body>
-<table border="1" width="50%" id="table">
- <tr onmouseover="changeColor(this)" onmouseout="recoverColor(this)">
-  <th>学号</th>
-  <th>姓名</th>
-  <th>操作</th>
- </tr>
-
- <tr onmouseover="changeColor(this)" onmouseout="recoverColor(this)">
-  <td>xh001</td>
-  <td>王小明</td>
-  <td><a href="javascript:;" onclick="deleteTable(this)">删除</a></td>   <!--在删除按钮上添加点击事件  -->
- </tr>
-
- <tr onmouseover="changeColor(this)" onmouseout="recoverColor(this)">
-  <td>xh002</td>
-  <td>刘小芳</td>
-  <td><a href="javascript:;" onclick="deleteTable(this)">删除</a></td>   <!--在删除按钮上添加点击事件  -->
- </tr>
-
-</table>
-<input type="button" value="添加一行" onclick="addTable()"/>   <!--在添加按钮上添加点击事件  -->
+    <table border="1" width="50%" id="table">
+    <tr>
+    <th>学号</th>
+    <th>姓名</th>
+    <th>操作</th>
+    </tr>
+    <tr>
+    <td>xh001</td>
+    <td>王小明</td>
+    <td><a href="javascript:;" onclick="deleteTable(this)">删除</a></td>
+    </tr>
+    <tr>
+    <td>xh002</td>
+    <td>刘小芳</td>
+    <td><a href="javascript:;" onclick="deleteTable(this)">删除</a></td>
+    </tr>
+    </table>
+    <input type="button" value="添加一行" id="add"/>
 </body>
 </html>
