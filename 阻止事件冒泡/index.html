@@ -5,33 +5,27 @@
     <title></title>
 </head>
 <body>
-    <div id="div">
-        <button id="button">°´Å¥</button>
-    </div>
-    <script>
-
-        //ÎªbuttonÌí¼Óµã»÷ÊÂ¼þ
-        var button = document.getElementById("button");
-        button.addEventListener("click", showButton);
-
-        //ÎªdivÌí¼Óµã»÷ÊÂ¼þ
-        var div = document.getElementById("div");
-        div.addEventListener("click", showDiv);
-
-        function showButton(event)
-        {
-            //»ñµÃÊÂ¼þµÄÀàÐÍ
-            alert("Äãµã»÷ÁË°´Å¥");
-
-            //×èÖ¹ÊÂ¼þÃ°ÅÝ
-            event.stopPropagation();
-        }
-
-        function showDiv(event)
-        {
-            alert("Äãµã»÷ÁËdiv");
-        }
-
-    </script>
+<div id="div">
+    <button id="button">æŒ‰é’®</button>
+</div>
+<script>
+    //ä¸ºbuttonæ·»åŠ ç‚¹å‡»äº‹ä»¶
+    var button = document.getElementById("button");
+    button.addEventListener("click", showButton);
+    //ä¸ºdivæ·»åŠ ç‚¹å‡»äº‹ä»¶
+    var div = document.getElementById("div");
+    div.addEventListener("click", showDiv);
+    function showButton(event)
+    {
+        //èŽ·å¾—äº‹ä»¶çš„ç±»åž‹
+        alert("ä½ ç‚¹å‡»äº†æŒ‰é’®");
+        //é˜»æ­¢äº‹ä»¶å†’æ³¡
+        event.stopPropagation();
+    }
+    function showDiv(event)
+    {
+        alert("ä½ ç‚¹å‡»äº†div");
+    }
+</script>
 </body>
 </html>
