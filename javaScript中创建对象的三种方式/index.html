@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>javaScript中创建对象的三种方式</title>
+</head>
+<body>
+    <script>
+    //方式1
+    var people1 = new Object();
+    people1.name = "iwen";
+    people1.age = "30";
+    document.write("name:" + people1.name + "<br/>");
+    document.write("age:" + people1.age + "<br/>");
+
+    //方式2
+    var people2 = {
+        name: "iwen",
+        age: 30
+    };
+    document.write("name:" + people2.name + "<br/>");
+    document.write("age:" + people2.age + "<br/>");
+
+    //方式3
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    var person3 = new Person("iwen", 30);
+    document.write("name:" + person3.name + "<br/>");
+    document.write("age:" + person3.age + "<br/>");
+</script>
+</body>
+</html>

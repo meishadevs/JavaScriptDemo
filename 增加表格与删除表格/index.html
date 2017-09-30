@@ -6,6 +6,11 @@
  <script type="text/javascript">
       window.onload = function () {
 
+          arrayName = ["王锐", "何煜中", "王磊", "冯松", "裴培", "马骁", "马婧", "周俊升"];
+
+          var numbers = document.querySelectorAll('.number');
+          lastNumber = numbers[numbers.length - 1].innerHTML;
+
           //改变背景颜色
           changeColor();
 
@@ -16,6 +21,8 @@
           var add = document.getElementById('add');
           add.onclick = function () {
               addTable();
+              changeColor();
+              deleteTable();
           }
       }
 
@@ -60,6 +67,15 @@
              //给a标签添加一个点击事件
              a.onclick = function () {
                  tbody.removeChild(this.parentNode.parentNode);
+
+                 var numbers = document.querySelectorAll('.number');
+
+                 if (numbers.length == 0) {
+                     lastNumber = "xh001";
+                     return;
+                 }
+
+                 lastNumber = numbers[numbers.length - 1].innerHTML;
              }
          }
      }
@@ -81,9 +97,20 @@
          tr.appendChild(td2);
          tr.appendChild(td3);
 
+         var numbers = document.querySelectorAll('.number');
+
+         if (numbers.length <= 0) {
+             lastNumber = 'xh001';
+         } else {
+             var length = lastNumber.split('00').length;
+             lastNumber = lastNumber.split('00')[0] + '00' + (parseInt(lastNumber.split('00')[length - 1]) + 1);
+         }
+
          //向td标签中添加内容
-         td1.innerHTML = "xh003";
-         td2.innerHTML = "赵小华";
+         td1.innerHTML = lastNumber;
+         td1.className = 'number';
+         td2.innerHTML = arrayName[Math.floor(Math.random() * arrayName.length)];
+         td2.className = 'name'
 
          //创建一个a标签
          var a = document.createElement("a");
@@ -91,8 +118,8 @@
          a.innerHTML = "删除";
          td3.appendChild(a);
 
-         changeColor();
-         deleteTable();
+         var numbers = document.querySelectorAll('.number');
+         lastNumber = numbers[numbers.length - 1].innerHTML;
      }
  </script>
 </head>
@@ -104,13 +131,13 @@
     <th>操作</th>
     </tr>
     <tr>
-    <td>xh001</td>
-    <td>王小明</td>
+    <td class="number">xh001</td>
+    <td class="name">王小明</td>
     <td><a href="javascript:;" onclick="deleteTable(this)">删除</a></td>
     </tr>
     <tr>
-    <td>xh002</td>
-    <td>刘小芳</td>
+    <td class="number">xh002</td>
+    <td class="name">刘小芳</td>
     <td><a href="javascript:;" onclick="deleteTable(this)">删除</a></td>
     </tr>
     </table>

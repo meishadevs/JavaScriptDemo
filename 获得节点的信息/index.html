@@ -1,0 +1,39 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>获得节点的信息</title>
+</head>
+<body>
+    <div id="con">
+        <p>javascript</p>
+        <div>jQuery</div>
+        <h5>PHP</h5>
+    </div>
+    <script type="text/javascript">
+
+        //根据div节点的id从html中获得div节点
+        var x = document.getElementById("con");
+
+        //在浏览器中显示div节点下子节点的数量
+        document.write("div节点下子节点的数量(div节点下包含了文本节点):" + x.childNodes.length + "<br/>");
+        document.write("div节点下子节点的数量(div节点下不包含文本节点):" + x.children.length + "<br/>");
+
+        //在浏览器中显示div节点下第一个子节点的类型
+        document.write("div节点下的第一个子节点的类型(div节点下包含了文本节点):" + x.firstChild.nodeType + "<br/>");
+        document.write("div节点下的第一个子节点的类型(div节点下不包含文本节点):" + x.children[0].nodeType + "<br/>");
+
+        //在浏览器中显示div节点下第一个子节点的名称
+        document.write("div节点下第一个子节点的名称(div节点下包含了文本节点):" + x.firstChild.nodeName + "<br/>");
+        document.write("div节点下第一个子节点的名称(div节点下不包含文本节点):" + x.children[0].nodeName + "<br/>");
+
+        //在浏览器中显示div节点下最后一个子节点的类型
+        document.write("div节点下最后一个子节点的类型(div节点下包含了文本节点):" + x.lastChild.nodeType + "<br/>");
+        document.write("div节点下最后一个子节点的类型(div节点下不包含文本节点):" + x.children[x.children.length - 1].nodeType + "<br/>");
+
+        //在浏览器中显示div节点下最后一个子节点的名称
+        document.write("div节点下最后一个子节点的名称(div节点下包含了文本节点):" + x.lastChild.nodeName + "<br/>");
+        document.write("div节点下最后一个子节点的名称(div节点下不包含文本节点):" + x.children[x.children.length - 1].nodeName + "<br/>");
+    </script>
+</body>
+</html>

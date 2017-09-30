@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>兼容IE浏览器的事件处理程序</title>
+</head>
+<body>
+    <button id="btn">按钮</button>
+    <script>
+        var button = document.getElementById("btn");
+
+        if(button.addEventListener) {
+
+            button.addEventListener("click", demo1);
+        } else if(button.attachEvent) {
+
+            button.attachEvent("onclick", demo2);
+        } else {
+
+            button.onclick = demo();
+        }
+
+        function demo1() {
+            alert("addEventListener 事件处理的兼容性测试");
+        }
+
+        function demo2() {
+            alert("attachEvent 事件处理的兼容性测试");
+        }
+
+        function demo3() {
+            alert("onClick 事件处理的兼容性测试");
+        }
+    </script>
+</body>
+</html>

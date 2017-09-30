@@ -1,0 +1,35 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>使用javaScript创建a标签</title>
+</head>
+<body>
+    <script type="text/javascript">
+
+        //获得body节点
+        var body = document.body;
+
+        //创建a标签
+        function createa(url,text) {
+
+            //创建一个a标签
+            var link = document.createElement("a");
+
+            //设置a标签的属性
+            link.href = url;
+            link.innerHTML = text;
+
+            //设置a标签的样式
+            link.style.color = "red";
+            link.style.backgroundColor = "darkgray";
+
+            //将a标签添加到body标签中
+            body.appendChild(link);
+        }
+
+        //调用函数创建链接
+        createa("http://www.imooc.com", "慕课网");
+    </script>
+</body>
+</html>

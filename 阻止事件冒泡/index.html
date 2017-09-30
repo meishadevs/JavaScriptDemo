@@ -2,30 +2,33 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <title>阻止事件冒泡</title>
 </head>
 <body>
-<div id="div">
-    <button id="button">按钮</button>
-</div>
-<script>
-    //为button添加点击事件
-    var button = document.getElementById("button");
-    button.addEventListener("click", showButton);
-    //为div添加点击事件
-    var div = document.getElementById("div");
-    div.addEventListener("click", showDiv);
-    function showButton(event)
-    {
-        //获得事件的类型
-        alert("你点击了按钮");
-        //阻止事件冒泡
-        event.stopPropagation();
-    }
-    function showDiv(event)
-    {
-        alert("你点击了div");
-    }
-</script>
+    <div id="div">
+        <button id="button">按钮</button>
+    </div>
+    <script>
+
+        //为button添加点击事件
+        var button = document.getElementById("button");
+        button.addEventListener("click", showButton);
+
+        //为div添加点击事件
+        var div = document.getElementById("div");
+        div.addEventListener("click", showDiv);
+
+        function showButton(event) {
+
+            alert("你点击了按钮");
+
+            //阻止事件冒泡
+            event.stopPropagation();
+        }
+
+        function showDiv(event) {
+            alert("你点击了div");
+        }
+    </script>
 </body>
 </html>

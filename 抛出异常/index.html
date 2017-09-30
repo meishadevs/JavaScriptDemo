@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <title>抛出异常</title>
 </head>
 <body>
     <form>
@@ -10,24 +10,19 @@
         <input id="btn" type="button" value="按钮" onclick="demo()">
     </form>
     <script>
-
-        function demo()
-        {
-            try
-            {
+        function demo() {
+            try {
                 //获得用户在输入框中输入的内容
                 var content = document.getElementById("text").value;
 
                 //如果用户的输入为空
-                if(content == "")
-                {
+                if (content == "") {
                     //抛出一个异常
                     throw "请输入"
                 }
             }
-            //处理抛出的异常
-            catch(err)
-            {
+                //处理抛出的异常
+            catch (err) {
                 alert(err);
             }
         }

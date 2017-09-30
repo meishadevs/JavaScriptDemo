@@ -2,19 +2,19 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <title>阻止事件的默认行为</title>
 </head>
 <body>
-<a href="http://www.baidu.com" id="a">百度一下</a>
-<script>
-    var a = document.getElementById("a");
-    a.addEventListener("click", showA);
-    function showA(event)
-    {
-        //阻止事件的行为
-        //设置了这个方法后,点击a标签没有反应
-        event.preventDefault();
-    }
-</script>
+    <a href="http://www.baidu.com" id="a">百度一下</a>
+    <script>
+        var a = document.getElementById("a");
+        a.addEventListener("click", showA);
+
+        function showA(event) {
+            //阻止事件的行为
+            //设置了这个方法后,点击a标签没有反应
+            event.preventDefault();
+        }
+    </script>
 </body>
 </html>

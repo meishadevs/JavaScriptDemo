@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <title>获得事件的类型和目标</title>
 </head>
 <body>
     <div>
@@ -12,13 +12,10 @@
         var button = document.getElementById("button");
         button.addEventListener("click", demo);
 
-        function demo(event)
-        {
-            //获得事件的类型
-            alert(event.type);
+        function demo(event) {
 
-            //获得事件的目标(触发事件的元素)
-            alert(event.target);
+            document.write('触发的事件类型:' + event.type + '<br/>');
+            document.write('触发事件的元素:' +  event.target + '<br/>');
         }
     </script>
 </body>
