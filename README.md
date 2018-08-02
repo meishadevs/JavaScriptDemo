@@ -27,3 +27,4 @@
 - **[消除的乐趣](http://meishadevs.com/HtmlDemo/fruit/)**
 - **[打地鼠](http://meishadevs.com/HtmlDemo/mouse/)**
 - **[超威兔宝宝打地鼠](http://meishadevs.com/HtmlDemo/hamster/)**
+- **[拖拽效果](http://meishadevs.com/JavaScriptDemo/%E6%8B%96%E6%8B%BD%E6%95%88%E6%9E%9C)**
