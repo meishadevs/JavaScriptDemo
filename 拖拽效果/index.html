@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>拖拽效果</title>
+    <link rel="stylesheet" type="text/css" href="./index.css">
+    <script src="./go.js"></script>
+    <script id="code">
+        function init() {
+
+            //绘制笔
+            var $ = go.GraphObject.make;
+
+            //根据nodeType值查询对应的文本
+            //当nodeType值为0时，表示计算节点
+            //当nodeType值为1时，表示存储节点
+            //当nodeType值为2时，表示容灾节点
+            //当nodeType值为3时，表示CDM节点
+            //根据groupType值确定节点属于哪个容器，且groupType与nodeType是一一对应的
+            //当groupType值为0时，表示计算容器
+            //当groupType值为1时，表示存储容器
+            //当groupType值为2时，表示容灾容器
+            //当groupType值为3时，表示CDM容器
+            //当groupType值为时，表示RAC集群
+            var arrayText = ["计算", "存储", "容灾", "CDM"];
+
+            //组的类型
+            //记录不同类型节点的数量
+            var numCalc = 0;//计算节点的数量
+            var numStorage = 0;//存储节点的数量
+            var numDister = 0;//容灾节点的数量
+            var numCdm = 0;//CDM节点的数量
+
+            //标记当前正在拖动的节点
+            var dragNode = null;
+
+            //在id属性值为"myDiagramDiv"的div标签上绘制图表
+            myDiagram = $(go.Diagram, "myDiagramDiv",
+                {
+                    //允许使用ctrl+c、ctrl+v复制粘贴
+                    "commandHandler.copiesTree": true,
+
+                    //允许左侧调色板中的节点拖入右侧图表绘制区
+                    allowDrop: true,
+
+                    "animationManager.isEnabled": false,
+
+                    //使用网格
+                    grid: $(go.Panel, "Grid",
+                        {
+                            background: "white"
+                        },
+                        $(go.Shape, "LineH", {stroke: "#F2F2F2"}),
+                        $(go.Shape, "LineV", {stroke: "#F2F2F2"})
+                    ),
+
+                    //当将节点拖入右侧图表绘制区并松开鼠标时会触发mouseDrop
+                    mouseDrop: function (e, obj) {
+
+                        //isAdd表示当前选中的节点是否添加到了容器中已经标记当前选中的容器是否添加到了容器中
+                        var isAdd = e.diagram.selection.Th.value.data.isAdd;
+
+                        //如果节点没有添加到容器中或者容器没有添加到容器中
+                        if (!isAdd) {
+                            myDiagram.commandHandler.deleteSelection();
+                        }
+                    },
+
+                    initialContentAlignment: go.Spot.Center,
+                    "grid.visible": true,
+                    "undoManager.isEnabled": true
+                });
+
+            //当将节点拖动到右侧的图表绘制区会触发
+            myDiagram.addDiagramListener("ExternalObjectsDropped", function (e) {
+
+                unSelectAllNode();
+
+                if (e.subject.Ea === null) {
+                    return;
+                }
+
+                //设置节点的属性
+                var node = e.subject.Ea.key.Zd;
+                var nodes = myDiagram.model.hg;
+                myDiagram.model.setDataProperty(node, 'nodeHeight', node.nodeHeight + 20);
+                myDiagram.model.setDataProperty(node, "textAlign", go.Spot.Bottom);
+                myDiagram.model.setDataProperty(node, "pictrueMargin", new go.Margin(-15, 0, 0, 0));
+                myDiagram.model.setDataProperty(node, "minSize", new go.Size(280, 110));
+
+                setNodeText(nodes);
+            });
+
+            //删除操作
+            myDiagram.commandHandler.deleteSelection = function () {
+
+                var model = myDiagram.model;
+                model.startTransaction("del node");
+                go.CommandHandler.prototype.deleteSelection.call(this);
+                var nodes = myDiagram.model.hg;
+                setNodeText(nodes);
+                model.commitTransaction("del node");
+            };
+
+            //不选中所有节点
+            function unSelectAllNode() {
+
+                //不选中左侧的节点
+                myPalette.findNodeForKey(-1024).isSelected = false;
+                paletteCalc.findNodeForKey("calc").isSelected = false;
+                paletteStorage.findNodeForKey("storage").isSelected = false;
+                paletteDister.findNodeForKey("dister").isSelected = false;
+                paletteCdm.findNodeForKey("cdm").isSelected = false;
+            }
+
+            /**
+             * 为右侧图表绘制区中的节点设置文本
+             * @param arr 记录了右侧图表绘制区上所有的节点信息
+             */
+            function setNodeText(arr) {
+                numCalc = 0;
+                numStorage = 0;
+                numDister = 0;
+                numCdm = 0;
+
+                //遍历右侧图表绘制区
+                for (var i = 0; i < arr.length; i++) {
+                    switch (arr[i].nodeType) {
+                        case 0:
+                            numCalc++;
+                            myDiagram.model.setDataProperty(arr[i], "text", arrayText[arr[i].nodeType] + numCalc);
+                            break;
+                        case 1:
+                            numStorage++;
+                            myDiagram.model.setDataProperty(arr[i], "text", arrayText[arr[i].nodeType] + numStorage);
+                            break;
+                        case 2:
+                            numDister++;
+                            myDiagram.model.setDataProperty(arr[i], "text", arrayText[arr[i].nodeType] + numDister);
+                            break;
+                        case 3:
+                            numCdm++;
+                            myDiagram.model.setDataProperty(arr[i], "text", arrayText[arr[i].nodeType] + numCdm);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            function finishDrop(e, grp) {
+
+                //如果将节点拖到了组上
+                if (grp !== null) {
+
+                    //获得组的位置
+                    var gloc = grp.location.copy();
+                    var groupType = grp.part.data.groupType;
+                    var nodeType = e.diagram.selection.Th.value.data.nodeType;
+                    var ok = false;
+
+                    if (groupType === nodeType) {
+                        //将当前选中的节点添加到组中
+                        ok = grp.addMembers(e.diagram.selection, true);
+                    } else {
+                        myDiagram.commandHandler.deleteSelection();
+                    }
+
+                    //如果将当前选中的节点添加到组中成功
+                    if (ok) {
+                        var newbnds = e.diagram.computePartsBounds(e.diagram.selection).addMargin(grp.placeholder.padding);
+                        e.diagram.moveParts(e.diagram.selection, gloc.subtract(newbnds.position), false);
+
+                        //如果将当前选中的节点添加到组中失败
+                    } else {
+                        e.diagram.currentTool.doCancel();
+                    }
+
+                    //如果节点拖到了组之外的其他地方
+                } else {
+                    //将节点放入组之外的空白区域
+                    var ok = e.diagram.commandHandler.addTopLevelParts(e.diagram.selection, true);
+                    if (!ok) e.diagram.currentTool.doCancel();
+                }
+            }
+
+            function nodeStyle() {
+                return [
+                    new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
+                    {
+                        //左侧菜单水平位置
+                        //locationSpot: go.Spot.Center,
+
+                        mouseEnter: function (e, obj) {
+                            showPorts(obj.part, true);
+                        },
+
+                        mouseLeave: function (e, obj) {
+                            showPorts(obj.part, false);
+                        }
+                    }
+                ];
+            }
+
+            /**
+             * 显示或者隐藏节点上的端点
+             * @param node 节点
+             * @param show 一个boolean类型的数据，true表示显示端点，false表示隐藏端点
+             */
+            function showPorts(node, show) {
+                var diagram = node.diagram;
+                if (!diagram || diagram.isReadOnly || !diagram.allowLink) return;
+                node.ports.each(function (port) {
+                    port.fill = show ? "rgba(0,0,0,.3)" : null;
+                });
+            }
+
+            //创建端点
+            function makePort(name, spot, output, input) {
+
+                return $(go.Shape, "Circle",
+                    {
+                        fill: "transparent",
+                        stroke: null,
+                        desiredSize: new go.Size(8, 8),
+                        alignment: spot,
+                        alignmentFocus: spot,
+                        portId: name,
+                        fromSpot: spot,
+                        toSpot: spot,
+                        fromLinkable: output,
+                        toLinkable: input,
+                        cursor: "pointer"
+                    });
+            }
+
+            //添加一个组，组的名称为OfGroups（大组模板）
+            myDiagram.groupTemplateMap.add("OfGroups",
+                $(go.Group, "Auto",
+                    {
+                        name: "Groups",
+                        background: "transparent",
+
+                        //(必须)用于将节点可以拖出组容器之外，false为拖不出组容器之外
+                        computesBoundsAfterDrag: true,
+                        computesBoundsIncludingLocation: true,
+                        //movable: false,
+                        mouseDrop: function (e, obj) {
+                            finishDrop(e, obj);
+                        },
+
+                        //当在节点上点击时会触发
+                        click: function (e, obj) {
+                            unSelectAllNode();
+
+                            //选中当前点击的节点
+
+                            if (obj.data.key === -6) {
+                                obj.part.isSelected = false;
+                                myDiagram.findNodeForKey(-2).isSelected = true;
+                            } else {
+                                obj.part.isSelected = true;
+                            }
+
+                            //获得当前选中的节点的信息
+                            var info = obj.part.data;
+                        },
+
+                        layout: $(go.GridLayout,
+                            {
+                                alignment: go.GridLayout.Position,
+
+                                //组需显示的默认列数
+                                wrappingColumn: 5,
+
+                                sorting: go.GridLayout.Forward,
+
+                                //单元格的大小
+                                cellSize: new go.Size(4, 4),
+
+                                //间距
+                                spacing: new go.Size(4, 4),
+                                //isOngoing: false
+                            }
+                        ),
+                    },
+                    nodeStyle(),
+                    $(go.Shape, "Rectangle",
+                        {
+                            fill: null,
+                            stroke: "#ff913a",
+                            strokeWidth: 2,
+                            margin: 0,
+                            cursor: "pointer",
+                            fromLinkable: true,
+                            toLinkable: true,
+                            fromLinkableSelfNode: true,
+                            toLinkableSelfNode: true,
+                            fromLinkableDuplicates: true,
+                            toLinkableDuplicates: true
+                        },
+                        new go.Binding("strokeWidth", "borderWidth")
+                    ),
+
+                    $(go.Panel, "Vertical",
+                        {
+                            name: "PanelVertical",
+                            minSize: new go.Size(50, 50)
+                        },
+
+                        //go.Size.stringify{"280" "111"}，不加此参数，即是分别用width、height来记录宽度
+                        new go.Binding("minSize", "minSize").makeTwoWay(),
+
+                        $(go.Panel, "Table",
+                            {
+                                stretch: go.GraphObject.Horizontal,
+
+                                //标题的背景颜色
+                                background: "#FFAA99"
+                            },
+                            new go.Binding("visible", "showTitle"),
+
+                            $(go.TextBlock,
+                                {
+                                    //alignment: go.Spot.Center,
+                                    margin: 5,
+                                    //文本不允许换行
+                                    isMultiline: false,
+                                    font: "bold 18px sans-serif",
+                                    opacity: 0.75,
+
+                                    //标题的字体颜色
+                                    stroke: "#404040"//标题字体颜色
+                                },
+                                new go.Binding("text", "text").makeTwoWay(),
+                                new go.Binding("font", "font").makeTwoWay()
+                            )//查API
+                        ), // end Horizontal Panel
+                        $(go.Placeholder,
+                            {
+                                padding: 5,
+
+                                //设置组容器中节点的对齐方式
+                                alignment: go.Spot.TopLeft
+                            })
+                    ),
+
+                    //设置端点
+                    makePort("T", go.Spot.Top, true, true),
+                    makePort("L", go.Spot.Left, true, true),
+                    makePort("R", go.Spot.Right, true, true),
+                    makePort("B", go.Spot.Bottom, true, true)
+                ));//(大组模板)
+
+            //添加一个组，组的名称为RacGroups（大组模板）
+            myDiagram.groupTemplateMap.add("RacGroups",
+                $(go.Group, "Auto",
+                    {
+                        name: "Groups",
+                        background: "transparent",
+
+                        //(必须)用于将节点可以拖出组容器之外，false为拖不出组容器之外
+                        computesBoundsAfterDrag: true,
+
+                        mouseDrop: finishDrop,
+
+                        //当在节点上点击时会触发
+                        click: function (e, obj) {
+                            unSelectAllNode();
+
+                            //选中当前点击的节点
+                            obj.part.isSelected = true;
+
+                            //获得当前选中的节点的信息
+                            //var info = obj.part.data;
+                        },
+
+                        layout: $(go.GridLayout,
+                            {
+                                alignment: go.GridLayout.Position,
+
+                                //组需显示的默认列数
+                                wrappingColumn: 1,
+
+                                sorting: go.GridLayout.Forward,
+
+                                //单元格的大小
+                                cellSize: new go.Size(1, 1),
+
+                                //间距
+                                spacing: new go.Size(4, 4)
+                            }
+                        ),
+                    },
+                    nodeStyle(),
+                    $(go.Shape, "Rectangle",
+                        {
+                            //组的背景颜色
+                            fill: null,
+
+                            //Main组的边框颜色
+                            stroke: "#ff913a",
+
+                            //Main组的边框厚度
+                            strokeWidth: 2,
+                            cursor: "pointer",
+                            fromLinkable: true,
+                            toLinkable: true,
+                            fromLinkableSelfNode: true,
+                            toLinkableSelfNode: true,
+                            fromLinkableDuplicates: true,
+                            toLinkableDuplicates: true
+                        }),
+
+                    //标题
+                    $(go.Panel, "Vertical",
+                        {
+                            name: "PanelVertical",
+                            minSize: new go.Size(20, 20)
+                        },
+
+                        //go.Size.stringify{"280" "111"}，不加此参数，即是分别用width、height来记录宽度
+                        new go.Binding("minSize", "minSize").makeTwoWay(),
+                        $(go.Panel, "Table",
+                            {
+                                stretch: go.GraphObject.Horizontal,
+                                //alignment: go.Spot.Center,
+
+                                //标题的背景颜色
+                                background: "#FFAA99"
+                            },
+                            $(go.TextBlock,
+                                {
+                                    alignment: go.Spot.Center,
+                                    margin: 5,
+                                    //文本不允许换行
+                                    isMultiline: false,
+                                    font: "bold 18px sans-serif",
+                                    opacity: 0.75,
+
+                                    //标题的字体颜色
+                                    stroke: "#404040"//标题字体颜色
+                                },
+                                new go.Binding("text", "text").makeTwoWay(),
+                                new go.Binding("font", "font").makeTwoWay()
+                            )//查API
+                        ), // end Horizontal Panel
+                        $(go.Placeholder,
+                            {
+                                padding: 5,
+
+                                //设置组容器中节点的对齐方式
+                                alignment: go.Spot.TopLeft
+                            })
+                    ),
+
+                    //设置端点
+                    makePort("T", go.Spot.Top, true, true),
+                    makePort("L", go.Spot.Left, true, true),
+                    makePort("R", go.Spot.Right, true, true),
+                    makePort("B", go.Spot.Bottom, true, true)
+                ));//(大组模板)
+
+            //定义节点模板
+            myDiagram.nodeTemplate =
+                //定义模板的类型
+                $(go.Node, "Auto",//查API
+                    {
+                        //当节点放入组中时，调用此方法
+                        mouseDrop: function (e, node) {
+                            finishDrop(e, node.containingGroup);
+                        },
+                        //当在节点上点击时会触发
+                        click: function (e, obj) {
+                            unSelectAllNode();
+
+                            //选中当前点击的节点
+                            obj.part.isSelected = true;
+                        },
+                        mouseEnter:function (e, obj) {
+                        },
+
+                    },
+
+                    //设置节点的形状
+                    $(go.Shape,
+                        {
+                            fill: null,
+                            stroke: null,
+                        },
+                        new go.Binding("width", "nodeWidth"),
+                        new go.Binding("height", "nodeHeight")
+                    ),
+
+                    //设置节点的图片
+                    $(go.Picture,
+                        {
+                            name: "Picture"
+                        },
+                        new go.Binding("width", "imgWidth"),
+                        new go.Binding("height", "imgHeight"),
+                        new go.Binding("source", "bgImage"),
+                        new go.Binding("alignment", "imgAlign"),
+                        new go.Binding("margin", "pictrueMargin")
+                    ),
+
+                    //节点的文本说明
+                    $(go.TextBlock,
+                        {
+                            alignment: go.Spot.BottomCenter,
+
+                            //文本不允许换行
+                            isMultiline: false,
+                            font: "12px sans-serif"
+                        },
+                        new go.Binding("text", "text").makeTwoWay(),
+                        new go.Binding("alignment", "textAlign")
+                    )
+                );//end nodeTemplate
+
+            //连线模板
+            myDiagram.linkTemplate =
+                $(go.Link,
+                    {
+                        routing: go.Link.AvoidsNodes,
+                        curve: go.Link.JumpOver,
+                        toEndSegmentLength: 50,
+                        corner: 5,
+                        relinkableFrom: true,//待查
+                        relinkableTo: true,//待查
+                        reshapable: true,//待查
+                        resegmentable: true,//待查
+
+                        mouseEnter: function (e, link) {
+                            link.findObject("HIGHLIGHT").stroke = "rgba(30,144,255,0.2)";
+                        }
+                        ,
+                        mouseLeave: function (e, link) {
+                            link.findObject("HIGHLIGHT").stroke = "transparent";
+                        }
+                    },
+                    new go.Binding("fromSpot", "fromSpot", go.Spot.parse),
+                    new go.Binding("toSpot", "toSpot", go.Spot.parse),
+
+                    $(go.Shape,
+                        {
+                            isPanelMain: true,
+                            strokeWidth: 8,
+                            stroke: "transparent",
+                            name: "HIGHLIGHT"
+                        }),
+                    $(go.Shape,  // the link path shape
+                        {
+                            isPanelMain: true,
+                            stroke: "gray",
+                            strokeWidth: 2
+                        }),
+
+                    //箭头
+                    $(go.Shape,
+                        {
+                            toArrow: "standard",
+                            stroke: null,
+                            fill: "gray"
+                        })
+                );
+
+            //设置线路的直角外观
+            myDiagram.toolManager.linkingTool.temporaryLink.routing = go.Link.Orthogonal;
+            myDiagram.toolManager.relinkingTool.temporaryLink.routing = go.Link.Orthogonal;
+
+            myDiagram.model =
+                $(go.GraphLinksModel,
+                    {
+                        linkFromPortIdProperty: "fromPort",  // required information:
+                        linkToPortIdProperty: "toPort",      // identifies data property names
+                        nodeDataArray: [],
+                        linkDataArray: []
+                    });
+
+
+            //左侧菜单
+            //初始化调色版
+            myPalette = $(go.Palette, "myPaletteDiv",
+                {
+                    groupTemplateMap: myDiagram.groupTemplateMap,
+                    contentAlignment: go.Spot.Center,
+                    layout: $(go.GridLayout,
+                        {
+                            wrappingColumn: 1,
+                            alignment: go.GridLayout.Position
+                        })
+                });
+
+            //容器节点的数据
+            myPalette.model = new go.GraphLinksModel([
+                {
+                    key: -1024,
+                    text: "容器",
+                    category: "OfGroups",
+                    isGroup: "true",
+                    font: "bold 13px sans-serif",
+                    isAdd: false
+                }
+            ]);
+
+            //计算节点
+            paletteCalc =
+                $(go.Palette, "paletteCalc",
+                    {
+                        //节点模板
+                        nodeTemplate: myDiagram.nodeTemplate,
+                        contentAlignment: go.Spot.Center
+                    });
+
+            //计算节点的数据
+            paletteCalc.model = new go.GraphLinksModel([
+                {
+                    key: "calc",
+                    nodeType: 0,
+                    nodeWidth: 46,
+                    nodeHeight: 50,
+                    imgWidth: 46,
+                    imgHeight: 50,
+                    bgImage: "./images/calc.png",
+                    imgAlign: go.Spot.Center,
+                    text: "",
+                    textAlign: go.Spot.Center,
+                    loc: "0 100",
+                    isAdd: false
+                }
+            ]);
+
+            //存储节点
+            paletteStorage =
+                $(go.Palette, "paletteStorage",
+                    {
+                        //节点模板
+                        nodeTemplate: myDiagram.nodeTemplate,
+                        contentAlignment: go.Spot.Center
+                    });
+
+            //存储节点的数据
+            paletteStorage.model = new go.GraphLinksModel([
+                {
+                    key: "storage",
+                    nodeType: 1,
+                    nodeWidth: 46,
+                    nodeHeight: 50,
+                    imgWidth: 46,
+                    imgHeight: 50,
+                    bgImage: "./images/storage.png",
+                    imgAlign: go.Spot.Center,
+                    text: "",
+                    textAlign: go.Spot.Center,
+                    isAdd: false
+                }
+            ]);
+
+            //容灾节点
+            paletteDister =
+                $(go.Palette, "paletteDister",
+                    {
+                        //节点模板
+                        nodeTemplate: myDiagram.nodeTemplate,
+                        contentAlignment: go.Spot.Center
+                    });
+
+            //容灾节点的数据
+            paletteDister.model = new go.GraphLinksModel([
+                {
+                    key: "dister",
+                    nodeType: 2,
+                    nodeWidth: 50,
+                    nodeHeight: 50,
+                    imgWidth: 50,
+                    imgHeight: 50,
+                    bgImage: "./images/disaster.png",
+                    imgAlign: go.Spot.Center,
+                    text: "",
+                    textAlign: go.Spot.Center,
+                    isAdd: false
+                }
+            ]);
+
+            //CDM节点
+            paletteCdm =
+                $(go.Palette, "paletteCdm",
+                    {
+                        //节点模板
+                        nodeTemplate: myDiagram.nodeTemplate,
+                        contentAlignment: go.Spot.Center,
+                    });
+
+            //CDM节点的数据
+            paletteCdm.model = new go.GraphLinksModel([
+                {
+                    key: "cdm",
+                    nodeType: 3,
+                    nodeWidth: 50,
+                    nodeHeight: 50,
+                    imgWidth: 50,
+                    imgHeight: 50,
+                    bgImage: "./images/cdm.png",
+                    imgAlign: go.Spot.Center,
+                    text: "",
+                    textAlign: go.Spot.Center,
+                    isAdd:false
+                }
+            ]);
+
+            load();
+        }//end init()
+
+        function save() {
+            saveDiagramProperties();
+            document.getElementById("mySavedModel").value = myDiagram.model.toJson();
+            myDiagram.isModified = false;
+        }
+
+        function load() {
+            myDiagram.model = go.Model.fromJson(document.getElementById("mySavedModel").value);
+        }
+
+        //保存图表属性
+        function saveDiagramProperties() {
+            myDiagram.model.modelData.position = go.Point.stringify(myDiagram.position);
+        }
+
+        //加载图表属性
+        function loadDiagramProperties(e) {
+            var pos = myDiagram.model.modelData.position;
+            if (pos) myDiagram.initialPosition = go.Point.parse(pos);
+        }
+    </script>
+</head>
+<body onload="init()">
+<div id="sample">
+    <div class="dialog">
+        <h3 class="dialog-title">资源申请</h3>
+        <div class="content clearfix">
+            <div class="left-menu">
+                <ul class="menu-list">
+                    <li class="menu-item">
+                        <h4 class="menu-title">容器</h4>
+                        <div class="menu-content" id="myPaletteDiv" style="width: 112px; height: 86px;"></div>
+                    </li>
+                    <li class="menu-item">
+                        <h4 class="menu-title">计算</h4>
+                        <div class="menu-content" id="paletteCalc" style="width: 112px; height: 86px;"></div>
+                    </li>
+                    <li class="menu-item">
+                        <h4 class="menu-title">存储</h4>
+                        <div class="menu-content" id="paletteStorage" style="width: 112px; height: 86px;"></div>
+                    </li>
+                    <li class="menu-item">
+                        <h4 class="menu-title">容灾</h4>
+                        <div class="menu-content" id="paletteDister" style="width: 112px; height: 86px;"></div>
+                    </li>
+                    <li class="menu-item">
+                        <h4 class="menu-title">CDM</h4>
+                        <div class="menu-content" id="paletteCdm" style="width: 112px; height: 86px;"></div>
+                    </li>
+                </ul>
+            </div>
+            <div class="right-content" id="myDiagramDiv" style="width: 872px; height: 615px;float: left"></div>
+        </div>
+    </div>
+    <span style="display: inline-block; vertical-align: top;">
+      Selected Part:<br/>
+      <div id="myInspectorDiv" class="inspector"> </div>
+    </span>
+    <div id="buttons">
+        <button id="saveModel" onclick="save()">Save</button>
+        <button id="loadModel" onclick="load()">Load</button>
+        Diagram Model saved in JSON format:
+    </div>
+    <div id="levelSlider"></div>
+    <textarea id="mySavedModel" style="width:100%;height:300px">
+        { "class": "go.GraphLinksModel",
+  "linkFromPortIdProperty": "fromPort",
+  "linkToPortIdProperty": "toPort",
+  "modelData": {"position":"-382.75 -281.3786132812503"},
+  "nodeDataArray": [
+{"key":-1024, "groupType":4, "text":"RAC集群", "isAdd":true, "category":"RacGroups", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-18.50000000000003 -248.00000000000028", "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":280, "height":110}},
+{"key":-2, "text":"容灾", "isAdd":true, "category":"OfGroups", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-17.5 55.99999999999997", "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":280, "height":110}},
+{"key":-3, "groupType":3, "text":"CDM", "isAdd":true, "category":"OfGroups", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-15.500000000000036 211.75722656249957", "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":280, "height":110}},
+{"key":-4, "groupType":0, "text":"计算", "isAdd":true, "category":"OfGroups", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-12.500000000000028 -214.62138671875027", "group":-1024, "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":280, "height":110}},
+{"key":-5, "groupType":1, "text":"存储", "isAdd":true, "category":"OfGroups", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-12.500000000000028 -94.62138671875029", "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":280, "height":110}, "group":-1024},
+{"key":-6, "groupType":2, "text":"容灾中的第二个容器", "isAdd":true, "showTitle":false, "borderWidth":0, "category":"OfGroups", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-12.5 60.99999999999997", "group":-2, "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":280, "height":80}}
+ ],
+  "linkDataArray": [
+{"from":-1024, "to":-3, "fromPort":"L", "toPort":"L", "isAdd":true},
+{"from":-1024, "to":-2, "fromPort":"B", "toPort":"T", "isAdd":true}
+ ]}
+    </textarea>
+</div>
+</body>
+</html>

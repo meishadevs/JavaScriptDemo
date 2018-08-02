@@ -1,0 +1,68 @@
+
+body,
+h3,
+h4,
+div,
+ul,
+li {
+    padding: 0;
+    margin: 0;
+}
+
+ul,
+li {
+    list-style: none;
+}
+
+canvas {
+    outline: none;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: "";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1; /*IE/7/6*/
+}
+
+.dialog {
+    width: 1014px;
+    margin: 0 auto;
+    background-color: #EEEEEE;
+}
+
+.dialog-title {
+    height: 42px;
+    line-height: 42px;
+    font-size: 18px;
+    font-weight: normal;
+    background-color: #fff;
+}
+
+.content {
+    padding: 10px;
+}
+
+.left-menu {
+    width: 112px;
+    margin-right: 10px;
+    background-color: #fff;
+    float: left;
+}
+
+.left-menu .menu-title {
+    height: 36px;
+    line-height: 36px;
+    background-color: #FAFAFA;
+    text-align: center;
+    font-weight: normal;
+    font-size: 14px;
+    border-bottom: solid 1px #CCCCCC;
+}
