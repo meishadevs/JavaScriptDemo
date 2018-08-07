@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>缩放及位移工具条</title>
+    <link rel="stylesheet" type="text/css" href="./index.css">
+    <script src="./jquery.min.js"></script>
+    <script>
+        window.onload = function () {
+
+            //获得元素
+            var child = document.querySelector(".child");
+            var slideBlock = document.querySelector(".slide-block");
+            var progress = document.querySelector(".progress");
+            var progressBar = document.querySelector(".progress-bar");
+            var scaleAdd = document.querySelector(".scale-add");
+            var scaleReduce = document.querySelector(".scale-reduce");
+            var blockTop = 50;
+            var scale = 0;
+            
+            //标记是否选中了滑块
+            var isSelect = false;
+            
+            //向上的按钮
+            document.querySelector(".scaleController-wheel-top").addEventListener("click", function () {
+                var childTop = child.offsetTop;
+                childTop -= 50;
+
+                if (childTop < 0) {
+                    childTop = 0;
+                }
+
+                child.style.top = childTop + "px";
+            });
+
+            //向右的按钮
+            document.querySelector(".scaleController-wheel-right").addEventListener("click", function () {
+                var childLeft = child.offsetLeft;
+                childLeft += 50;
+
+                if (childLeft > 900) {
+                    childLeft = 900;
+                }
+
+                child.style.left = childLeft + "px";
+            });
+
+            //向下的按钮
+            document.querySelector(".scaleController-wheel-bottom").addEventListener("click", function () {
+                var childTop = child.offsetTop;
+                childTop += 50;
+
+                if (childTop > 500) {
+                    childTop = 500;
+                }
+
+                child.style.top = childTop + "px";
+            });
+
+            //向左的按钮
+            document.querySelector(".scaleController-wheel-left").addEventListener("click", function () {
+                var childLeft = child.offsetLeft;
+                childLeft -= 50;
+
+                if (childLeft < 0) {
+                    childLeft = 0;
+                }
+
+                child.style.left = childLeft + "px";
+            });
+
+            //中间的按钮
+            document.querySelector(".scaleController-wheel-center").addEventListener("click", function () {
+                blockTop = 50;
+                scale = 1;
+                child.style.left = "450px";
+                child.style.top = "250px";
+                child.style.transform = "scale(" + scale + ")";
+                slideBlock.style.top = blockTop + "px";
+                progressBar.style.height = blockTop + "px";
+            });
+            
+            slideBlock.addEventListener("mousedown", function (e) {
+                e.stopPropagation();
+                isSelect = true;
+            })
+
+            //鼠标按下
+            slideBlock.addEventListener("mousedown", function (e) {
+                e.stopPropagation();
+                isSelect = true;
+            })
+
+            //拖动
+            window.addEventListener("mousemove", function (e) {
+
+                //如果用户选中了滑块
+                if(isSelect) {
+
+                    //获得当前鼠标的y坐标
+                    var y = e.clientY;
+
+                    //获得进度条相对于浏览器的top值
+                    progressTop = getPosition(progress).top;
+
+                    //计算滑块相对于进度条的top值
+                    blockTop = y - progressTop;
+
+                    changeScale(blockTop);
+                }
+            });
+
+            window.addEventListener("mouseup", function () {
+                isSelect = false;
+                window.mousedown = null;
+                window.mousemove = null;
+                window.mouseup = null;
+            });
+
+            //监听放大按钮
+            scaleAdd.addEventListener("click", function () {
+                blockTop -= 10;
+                changeScale();
+            });
+
+            //监听缩小按钮
+            scaleReduce.addEventListener("click", function () {
+                blockTop += 10;
+                changeScale();
+            });
+
+            /**
+             * 改变缩放比例
+             */
+            function changeScale() {
+
+                //限制滑块滑动的最大距离
+                if(blockTop >= progress.offsetHeight - slideBlock.offsetHeight) {
+                    blockTop = progress.offsetHeight - slideBlock.offsetHeight;
+                }
+
+                //限制滑块滑动的最小距离
+                if(blockTop < 0) {
+                    blockTop = 0;
+                }
+
+                if (blockTop <= 50) {
+                    scale = Math.abs(blockTop - 60) / 10
+                } else {
+                    scale = (150 - blockTop) / 100
+                }
+
+                slideBlock.style.top = blockTop + "px";
+                progressBar.style.height = blockTop + "px";
+                child.style.transform = "scale(" + scale + ")";
+            }
+        }
+
+
+        /**
+         * 获得元素相对于浏览器的坐标
+         * @param ele 元素
+         * @returns {{left: (Number|number), top: (Number|number)}}
+         */
+        function getPosition(ele) {
+
+            //获取元素相对于其父元素的left值
+            var left = ele.offsetLeft;
+            var top = ele.offsetTop;
+
+            //获得元素的父元素
+            current = ele.offsetParent;
+
+            //一直循环直到根元素
+            while(current != null) {
+                left += current.offsetLeft;
+                top += current.offsetTop;
+                current = current.offsetParent;
+            }
+
+            return {
+                "left": left,
+                "top": top
+            };
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="parent">
+            <div class="child">box</div>
+        </div>
+        <div class="scaleController">
+            <div class="scaleController-wheel">
+                <div class="scaleController-wheel-top"></div>
+                <div class="scaleController-wheel-left"></div>
+                <div class="scaleController-wheel-right"></div>
+                <div class="scaleController-wheel-bottom"></div>
+                <div class="scaleController-wheel-center"></div>
+            </div>
+            <div class="scaleController-zoomIn">
+                <button class="btn btn-default scale-add">+</button>
+            </div>
+            <div class="progress-container">
+                <div class="progress">
+                    <div class="progress-bar"></div>
+                </div>
+                <div class="slide-block noselect">-</div>
+                <div class="slide-marker-max noselect">3x</div>
+                <div class="slide-marker-origin noselect">1x</div>
+                <div class="slide-marker-min noselect">0.1x</div>
+            </div>
+            <div class="scaleController-zoomOut">
+                <button class="btn btn-default scale-reduce">-</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

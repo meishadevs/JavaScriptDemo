@@ -1,0 +1,331 @@
+
+
+body,
+h3,
+h4,
+div,
+ul,
+li {
+    padding: 0;
+    margin: 0;
+}
+
+ul,
+li {
+    list-style: none;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: "";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1; /*IE/7/6*/
+}
+
+button,
+input,
+select,
+textarea {
+    margin: 0;
+    font-family: inherit;
+    font-size: 100%;
+}
+
+button,
+input {
+    line-height: normal;
+}
+
+button,
+select {
+    text-transform: none;
+}
+
+button,
+html
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+    cursor: pointer;
+    -webkit-appearance: button;
+}
+
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.428571429;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+.btn-default {
+    color: #333333;
+    background-color: #ffffff;
+    border-color: #cccccc;
+}
+
+.container {
+    position: relative;
+}
+
+.parent {
+    width: 1000px;
+    height: 600px;
+    margin: 10px;
+    border: solid 1px #0f0;
+    position: relative;
+}
+
+.parent .child {
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+    font-size: 20px;
+    background-color: #f00;
+    color: #000;
+    transform: scale(1);
+    position: absolute;
+    left: 450px;
+    top: 250px;
+}
+
+
+.progress {
+    height: 20px;
+    overflow: hidden;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.scaleController {
+    width: 80px;
+    padding: 0px;
+    z-index: 100;
+    position: absolute;
+    right: 310px;
+    top: 20px;
+}
+
+.scaleController .scaleController-wheel {
+    padding: 0px;
+    margin: 0 auto;
+    position: relative;
+    border: 1px #eee solid;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    box-shadow: 0px 0px 15px #888888;
+    background: white;
+    margin-bottom: 10px;
+}
+
+.scaleController .scaleController-wheel .scaleController-wheel-top {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    background-color: white;
+    border-radius: 100px 0 0;
+    transform: rotate(45deg);
+    cursor: pointer;
+    box-shadow: 0px 0px 5px #888888;
+    position: absolute;
+    top: -10px;
+    left: 20px;
+}
+
+.scaleController .scaleController-wheel .scaleController-wheel-left {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    background-color: white;
+    border-radius: 100px 0 0;
+    transform: rotate(-45deg);
+    cursor: pointer;
+    box-shadow: 0px 0px 5px #888888;
+    position: absolute;
+    top: 20px;
+    left: -10px;
+}
+
+.scaleController .scaleController-wheel .scaleController-wheel-right {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    background-color: white;
+    border-radius: 100px 0 0;
+    transform: rotate(135deg);
+    cursor: pointer;
+    box-shadow: 0px 0px 5px #888888;
+    position: absolute;
+    top: 20px;
+    left: 50px;
+}
+
+.scaleController .scaleController-wheel .scaleController-wheel-bottom {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    background-color: white;
+    border-radius: 100px 0 0;
+    transform: rotate(225deg);
+    cursor: pointer;
+    box-shadow: 0px 0px 5px #888888;
+    position: absolute;
+    top: 50px;
+    left: 20px;
+}
+
+.scaleController .scaleController-wheel .scaleController-wheel-center {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 5px #888888;
+    border: 5px solid #eee;
+    background: white;
+    cursor: -webkit-grab;
+    position: relative;
+    top: 20px;
+    left: 20px;
+}
+
+.scaleController .scaleController-zoomIn {
+    margin-bottom: 6px;
+    position: relative;
+    left: 22px;
+}
+
+.scaleController .scaleController-zoomIn .btn {
+    padding: 4px 14px;
+    border-radius: 4px;
+    background: white;
+    height: 28px;
+    box-shadow: 0px 0px 5px #888888;
+}
+
+.scaleController .progress-container {
+    width: 10px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.scaleController .progress-container .progress {
+    width: 10px;
+    height: 116px;
+    box-shadow: 0px 0px 10px #888888;
+    position: relative;
+}
+
+.progress-bar {
+    width: 10px;
+    height: 50px;
+    font-size: 12px;
+    color: #ffffff;
+    text-align: center;
+    background-color: #428bca;
+    -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    -webkit-transition: width 0.6s ease;
+    transition: width 0.6s ease;
+    float: left;
+}
+
+.scaleController .progress-container .slide-block {
+    width: 25px;
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0px 0px 10px #888888;
+    cursor: ns-resize;
+    position: absolute;
+    left: -7px;
+    top: 50px;
+}
+
+.scaleController .progress-container .slide-marker-max {
+    font-size: 14px;
+    position: absolute;
+    top: 0px;
+    left: 20px;
+}
+
+.scaleController .progress-container .slide-marker-origin {
+    font-size: 14px;
+    position: absolute;
+    top: 50px;
+    left: 20px;
+}
+
+.scaleController .progress-container .slide-marker-min {
+    font-size: 14px;
+    position: absolute;
+    top: 100px;
+    left: 20px;
+}
+
+.scaleController .scaleController-zoomOut {
+    margin-top: 6px;
+    position: relative;
+    left: 23px;
+}
+
+.scaleController .scaleController-zoomOut .btn {
+    padding: 4px 14px;
+    border-radius: 4px;
+    background: white;
+    height: 28px;
+    box-shadow: 0px 0px 5px #888888;
+}
+
+.scaleController-wheel-top:active,
+.scaleController-wheel-right:active,
+.scaleController-wheel-bottom:active,
+.scaleController-wheel-left:active,
+.scaleController-wheel-center:active {
+    background: #eee;
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125) !important;
+}
+
+#myOverviewDiv {
+    width:200px;
+    height:100px;
+    border: solid 1px darkgrey;
+    background-color: #fff;
+    z-index: 300;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
