@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>饼图</title>
+    <style>
+        #main {
+            width: 500px;
+            height: 320px;
+        }
+    </style>
+    <script src="./echarts.js"></script>
+</head>
+<body>
+    <div id="main"></div>
+    <script>
+        var option = {
+
+            //标题
+            title: {
+                text: '健康',
+
+                //标题到容器左侧的距离
+                left: 'center'
+            },
+
+            //图例组件(底部小方块)
+            legend: {
+                //图例组件到容器底部的距离
+                bottom: 10,
+
+                //图例组件到容器左侧的距离
+                left: 'center',
+                data: ['95分以上', '90分以上', '80分以上', '70分以上', '70分以下']
+            },
+
+            //提示框组件
+            tooltip: {
+
+                //触发类型为数据项图形触发
+                trigger: 'item',
+
+                //提示信息的格式
+                formatter: "{b}: {c} "
+            },
+
+            //图表
+            series: [
+                {
+                    //图表的类型为饼图
+                    type: 'pie',
+
+                    //饼图的半径
+                    radius: '65%',
+
+                    //饼图中心(圆心)的坐标，数组的第一项为横坐标，第二项为纵坐标
+                    center: ['50%', '50%'],
+
+                    //选中模式为单选
+                    selectedMode: 'single',
+
+                    //开启防止标签重叠策略
+                    avoidLabelOverlap: true,
+
+                    //饼图上的标签
+                    label: {
+                        //隐藏标签
+                        show: false
+                    },
+
+                    //引导线
+                    labelLine: {
+                        normal: {
+                            //隐藏引导线
+                            show: false
+                        }
+                    },
+                    data: [
+                        {value: 10, name: '95分以上'},
+                        {value: 20, name: '90分以上'},
+                        {value: 5, name: '80分以上'},
+                        {value: 6, name: '70分以上'},
+                        {value: 3, name: '70分以下'}
+                    ]
+                }
+            ],
+
+            //饼块的颜色
+            color: ['#4472C4', '#ED7D31', '#A5A5A5', '#FFC000', '#5B9BD5']
+        };
+
+        //绘制图表。
+      var myCharts = echarts.init(document.getElementById('main'));
+      myCharts.setOption(option);
+
+      //监听饼图中的点击事件
+      myCharts.on("click", function (params) {
+          if (params.name == "95分以上") {
+              console.log("你点击了95分以上的饼块");
+          }
+
+          if (params.name == "90分以上") {
+              console.log("你点击90分以上的饼块");
+          }
+
+          if (params.name == "80分以上") {
+              console.log("你点击了80分以上的饼块");
+          }
+
+          if (params.name == "70分以上") {
+              console.log("你点击了70分以上的饼块");
+          }
+
+          if (params.name == "70分以下") {
+              console.log("你点击了70分以下的饼块");
+          }
+      });
+    </script>
+</body>
+</html>

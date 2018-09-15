@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>折线图</title>
+    <style>
+        #main {
+            width: 500px;
+            height: 320px;
+        }
+    </style>
+    <script src="./echarts.js"></script>
+</head>
+<body>
+    <div id="main"></div>
+    <script>
+        option = {
+
+            //标题
+            title: {
+                text: '问题发现数',
+                left: 'center'
+            },
+
+            //提示框组件
+            tooltip: {
+                trigger: 'axis'
+            },
+
+            //图例组件(底部小方块)
+            legend: {
+                //图例组件到容器底部的距离
+                bottom: 0,
+
+                //图例组件到容器左侧的距离
+                left: 'center',
+                data:['总数', '表空间使用率', 'ASM使用率']
+            },
+
+            //X轴
+            xAxis: {
+
+                //坐标轴的类型为类目型
+                type: 'category',
+
+                //设置坐标轴两端的留白策略为留白
+                boundaryGap: true,
+                data: ['9月1日', '9月2日', '9月3日', '9月4日']
+            },
+
+            //Y轴
+            yAxis: {
+                type: 'value',
+                data: [0, 2, 4, 6, 8, 10, 12, 14, 16]
+            },
+
+            //图表
+            series: [
+                {
+                    name:'总数',
+                    type:'line',
+                    stack: '总数',
+                    data:[5, 7, 9, 3]
+                },
+                {
+                    name:'表空间使用率',
+                    type:'line',
+                    stack: '总数',
+                    data:[2, 3, 2, 1]
+                },
+                {
+                    name:'ASM使用率',
+                    type:'line',
+                    stack: '总数',
+                    data:[1, 2, 3, 1]
+                }
+            ]
+        };
+
+        //绘制图表。
+        var myCharts = echarts.init(document.getElementById('main'));
+        myCharts.setOption(option);
+    </script>
+</body>
+</html>
