@@ -29,3 +29,5 @@
 - **[超威兔宝宝打地鼠](http://meishadevs.com/HtmlDemo/hamster/)**
 - **[拖拽效果](http://meishadevs.com/JavaScriptDemo/%E6%8B%96%E6%8B%BD%E6%95%88%E6%9E%9C)**
 - **[缩放及位移工具条](http://meishadevs.com/JavaScriptDemo/%E7%BC%A9%E6%94%BE%E5%8F%8A%E4%BD%8D%E7%A7%BB%E5%B7%A5%E5%85%B7%E6%9D%A1/)**
+- **[饼图](http://meishadevs.com/JavaScriptDemo/%E9%A5%BC%E5%9B%BE/)**
+- **[折线图](http://meishadevs.com/JavaScriptDemo/%E6%8A%98%E7%BA%BF%E5%9B%BE/)**
