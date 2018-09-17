@@ -31,3 +31,4 @@
 - **[缩放及位移工具条](http://meishadevs.com/JavaScriptDemo/%E7%BC%A9%E6%94%BE%E5%8F%8A%E4%BD%8D%E7%A7%BB%E5%B7%A5%E5%85%B7%E6%9D%A1/)**
 - **[饼图](http://meishadevs.com/JavaScriptDemo/%E9%A5%BC%E5%9B%BE/)**
 - **[折线图](http://meishadevs.com/JavaScriptDemo/%E6%8A%98%E7%BA%BF%E5%9B%BE/)**
+- **[自动触发饼图](http://meishadevs.com/JavaScriptDemo/%E8%87%AA%E5%8A%A8%E8%A7%A6%E5%8F%91%E9%A5%BC%E5%9B%BE/)**
