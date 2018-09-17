@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自动触发饼图</title>
+    <style>
+        .pie {
+            width: 500px;
+            height: 320px;
+        }
+    </style>
+    <script src="./echarts.js"></script>
+</head>
+<body>
+    <div class="pie"></div>
+    <script>
+
+        //饼图的配置项
+        var optionPie = {
+
+            //标题
+            title: {
+                text: '健康',
+
+                //标题到容器左侧的距离
+                left: 'center'
+            },
+
+            //图例组件(底部小方块)
+            legend: {
+                //图例组件到容器底部的距离
+                bottom: 10,
+
+                //图例组件到容器左侧的距离
+                left: 'center',
+                data: ['95分以上', '90分到95分', '80分到90分', '70分到80分', '70分以下']
+            },
+
+            //提示框组件
+            tooltip: {
+
+                //触发类型为数据项图形触发
+                trigger: 'item',
+
+                //提示信息的格式
+                formatter: "{b}: {c} "
+            },
+
+            //图表
+            series: [
+                {
+                    //图表的类型为饼图
+                    type: 'pie',
+
+                    //饼图的半径
+                    radius: '65%',
+
+                    //饼图中心(圆心)的坐标，数组的第一项为横坐标，第二项为纵坐标
+                    center: ['50%', '50%'],
+
+                    //选中模式为单选
+                    selectedMode: 'single',
+
+                    //开启防止标签重叠策略
+                    avoidLabelOverlap: true,
+
+                    //饼图上的标签
+                    label: {
+                        //隐藏标签
+                        show: false
+                    },
+
+                    //引导线
+                    labelLine: {
+                        normal: {
+                            //隐藏引导线
+                            show: false
+                        }
+                    },
+                    data: [
+                        {value: 10, name: '95分以上'},
+                        {value: 20, name: '90分到95分'},
+                        {value: 5, name: '80分到90分'},
+                        {value: 6, name: '70分到80分'},
+                        {value: 3, name: '70分以下'}
+                    ]
+                }
+            ],
+
+            //饼块的颜色
+            color: ['#4472C4', '#ED7D31', '#A5A5A5', '#FFC000', '#5B9BD5']
+        };
+
+        //绘制饼图
+        var echartPie = echarts.init(document.querySelector(".pie"));
+        echartPie.setOption(optionPie);
+        
+        //当前选中饼块的索引
+        var currIndex = -1;
+
+        setInterval(function () {
+
+            //获得饼图中饼块的个数
+            var dataLen = optionPie.series[0].data.length;
+
+            //取消之前高亮的饼块
+            echartPie.dispatchAction({
+                type: 'unselected',
+                seriesIndex: 0,
+                dataIndex: currIndex
+            });
+
+            //不选中之前选中的饼块
+            echartPie.dispatchAction({
+                type: 'pieUnSelect',
+                seriesIndex: 0,
+                dataIndex: currIndex
+            });
+
+            //限制currIndex的范围为[1, 饼块的个数]
+            currIndex = (currIndex + 1) % dataLen;
+
+            //高亮当前饼块
+            echartPie.dispatchAction({
+                type: 'selected',
+                seriesIndex: 0,
+                dataIndex: currIndex
+            });
+
+            //显示当前饼块的tooltip
+            echartPie.dispatchAction({
+                type: 'showTip',
+                seriesIndex: 0,
+                dataIndex: currIndex
+            });
+
+            //选中当前饼块
+            echartPie.dispatchAction({
+                type: 'pieSelect',
+                seriesIndex: 0,
+                dataIndex: currIndex
+            });
+        }, 1000);
+    </script>
+</body>
+</html>
