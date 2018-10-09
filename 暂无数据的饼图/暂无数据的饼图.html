@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>暂无数据的饼图</title>
+    <style>
+        #main {
+            width: 500px;
+            height: 320px;
+        }
+    </style>
+    <script src="./echarts.js"></script>
+</head>
+<body>
+<div id="main"></div>
+<script>
+    var option =  {
+        title: {
+            text: '扣分项',
+            left: 'center'
+        },
+
+        series: [{
+            type: 'pie',
+            radius: ['65%', '60%'],
+            hoverAnimation: false,
+            label: {
+                normal: {
+                    position: 'center'
+                }
+            },
+            data: [
+                {
+                    value: 100 ,
+                    tooltip: {
+                        show: false
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: '#E0E3E9',
+                        }
+                    },
+                    label: {
+                        normal: {
+                            formatter: '暂无数据',
+                            textStyle: {
+                                fontSize: 20,
+                                color: '#000'
+                            }
+                        },
+
+                    }
+                }
+            ]
+        }]
+    };
+
+    //绘制图表。
+    var myCharts = echarts.init(document.getElementById('main'));
+    myCharts.setOption(option);
+</script>
+</body>
+</html>
