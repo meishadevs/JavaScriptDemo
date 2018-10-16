@@ -12,24 +12,24 @@
             var $ = go.GraphObject.make;
 
             //根据nodeType值查询对应的文本
-            //当nodeType值为0时，表示计算节点
-            //当nodeType值为1时，表示存储节点
-            //当nodeType值为2时，表示容灾节点
-            //当nodeType值为3时，表示CDM节点
-            //根据groupType值确定节点属于哪个容器，且groupType与nodeType是一一对应的
-            //当groupType值为0时，表示计算容器
-            //当groupType值为1时，表示存储容器
-            //当groupType值为2时，表示容灾容器
-            //当groupType值为3时，表示CDM容器
-            //当groupType值为时，表示RAC集群
-            var arrayText = ["计算", "存储", "容灾", "CDM"];
+            //当nodeType值为0时，表示苹果
+            //当nodeType值为1时，表示桃子
+            //当nodeType值为2时，表示土豆
+            //当nodeType值为3时，表示肉
+            //根据groupType值确定东西属于哪个篮子，且groupType与nodeType是一一对应的
+            //当groupType值为0时，表示存放苹果的篮子
+            //当groupType值为1时，表示存放桃子的篮子
+            //当groupType值为2时，表示存放土豆的篮子
+            //当groupType值为3时，表示存放肉的篮子
+            //当groupType值为时，表示存放水果的篮子
+            var arrayText = ["苹果", "桃子", "土豆", "肉"];
 
             //组的类型
             //记录不同类型节点的数量
-            var numCalc = 0;//计算节点的数量
-            var numStorage = 0;//存储节点的数量
-            var numDister = 0;//容灾节点的数量
-            var numCdm = 0;//CDM节点的数量
+            var numApple = 0;//苹果的数量
+            var numPeach = 0;//桃子的数量
+            var numPotato = 0;//土豆的数量
+            var numMeat = 0;//肉的数量
 
             //标记当前正在拖动的节点
             var dragNode = null;
@@ -107,10 +107,10 @@
 
                 //不选中左侧的节点
                 myPalette.findNodeForKey(-1024).isSelected = false;
-                paletteCalc.findNodeForKey("calc").isSelected = false;
-                paletteStorage.findNodeForKey("storage").isSelected = false;
-                paletteDister.findNodeForKey("dister").isSelected = false;
-                paletteCdm.findNodeForKey("cdm").isSelected = false;
+                paletteApple.findNodeForKey("Apple").isSelected = false;
+                palettePeach.findNodeForKey("Peach").isSelected = false;
+                palettePotato.findNodeForKey("Potato").isSelected = false;
+                paletteMeat.findNodeForKey("Meat").isSelected = false;
             }
 
             /**
@@ -118,29 +118,29 @@
              * @param arr 记录了右侧图表绘制区上所有的节点信息
              */
             function setNodeText(arr) {
-                numCalc = 0;
-                numStorage = 0;
-                numDister = 0;
-                numCdm = 0;
+                numApple = 0;
+                numPeach = 0;
+                numPotato = 0;
+                numMeat = 0;
 
                 //遍历右侧图表绘制区
                 for (var i = 0; i < arr.length; i++) {
                     switch (arr[i].nodeType) {
                         case 0:
-                            numCalc++;
-                            myDiagram.model.setDataProperty(arr[i], "text", arrayText[arr[i].nodeType] + numCalc);
+                            numApple++;
+                            myDiagram.model.setDataProperty(arr[i], "text", arrayText[arr[i].nodeType] + numApple);
                             break;
                         case 1:
-                            numStorage++;
-                            myDiagram.model.setDataProperty(arr[i], "text", arrayText[arr[i].nodeType] + numStorage);
+                            numPeach++;
+                            myDiagram.model.setDataProperty(arr[i], "text", arrayText[arr[i].nodeType] + numPeach);
                             break;
                         case 2:
-                            numDister++;
-                            myDiagram.model.setDataProperty(arr[i], "text", arrayText[arr[i].nodeType] + numDister);
+                            numPotato++;
+                            myDiagram.model.setDataProperty(arr[i], "text", arrayText[arr[i].nodeType] + numPotato);
                             break;
                         case 3:
-                            numCdm++;
-                            myDiagram.model.setDataProperty(arr[i], "text", arrayText[arr[i].nodeType] + numCdm);
+                            numMeat++;
+                            myDiagram.model.setDataProperty(arr[i], "text", arrayText[arr[i].nodeType] + numMeat);
                             break;
                         default:
                             break;
@@ -596,7 +596,7 @@
             myPalette.model = new go.GraphLinksModel([
                 {
                     key: -1024,
-                    text: "容器",
+                    text: "篮子",
                     category: "OfGroups",
                     isGroup: "true",
                     font: "bold 13px sans-serif",
@@ -604,25 +604,25 @@
                 }
             ]);
 
-            //计算节点
-            paletteCalc =
-                $(go.Palette, "paletteCalc",
+            //苹果
+            paletteApple =
+                $(go.Palette, "paletteApple",
                     {
                         //节点模板
                         nodeTemplate: myDiagram.nodeTemplate,
                         contentAlignment: go.Spot.Center
                     });
 
-            //计算节点的数据
-            paletteCalc.model = new go.GraphLinksModel([
+            //苹果的数据
+            paletteApple.model = new go.GraphLinksModel([
                 {
-                    key: "calc",
+                    key: "Apple",
                     nodeType: 0,
                     nodeWidth: 46,
                     nodeHeight: 50,
                     imgWidth: 46,
                     imgHeight: 50,
-                    bgImage: "./images/calc.png",
+                    bgImage: "./images/apple.png",
                     imgAlign: go.Spot.Center,
                     text: "",
                     textAlign: go.Spot.Center,
@@ -631,25 +631,25 @@
                 }
             ]);
 
-            //存储节点
-            paletteStorage =
-                $(go.Palette, "paletteStorage",
+            //桃子
+            palettePeach =
+                $(go.Palette, "palettePeach",
                     {
                         //节点模板
                         nodeTemplate: myDiagram.nodeTemplate,
                         contentAlignment: go.Spot.Center
                     });
 
-            //存储节点的数据
-            paletteStorage.model = new go.GraphLinksModel([
+            //桃子的数据
+            palettePeach.model = new go.GraphLinksModel([
                 {
-                    key: "storage",
+                    key: "Peach",
                     nodeType: 1,
                     nodeWidth: 46,
                     nodeHeight: 50,
                     imgWidth: 46,
                     imgHeight: 50,
-                    bgImage: "./images/storage.png",
+                    bgImage: "./images/peach.png",
                     imgAlign: go.Spot.Center,
                     text: "",
                     textAlign: go.Spot.Center,
@@ -657,25 +657,25 @@
                 }
             ]);
 
-            //容灾节点
-            paletteDister =
-                $(go.Palette, "paletteDister",
+            //土豆
+            palettePotato =
+                $(go.Palette, "palettePotato",
                     {
                         //节点模板
                         nodeTemplate: myDiagram.nodeTemplate,
                         contentAlignment: go.Spot.Center
                     });
 
-            //容灾节点的数据
-            paletteDister.model = new go.GraphLinksModel([
+            //土豆的数据
+            palettePotato.model = new go.GraphLinksModel([
                 {
-                    key: "dister",
+                    key: "Potato",
                     nodeType: 2,
                     nodeWidth: 50,
                     nodeHeight: 50,
                     imgWidth: 50,
                     imgHeight: 50,
-                    bgImage: "./images/disaster.png",
+                    bgImage: "./images/potato.png",
                     imgAlign: go.Spot.Center,
                     text: "",
                     textAlign: go.Spot.Center,
@@ -683,25 +683,25 @@
                 }
             ]);
 
-            //CDM节点
-            paletteCdm =
-                $(go.Palette, "paletteCdm",
+            //肉
+            paletteMeat =
+                $(go.Palette, "paletteMeat",
                     {
                         //节点模板
                         nodeTemplate: myDiagram.nodeTemplate,
                         contentAlignment: go.Spot.Center,
                     });
 
-            //CDM节点的数据
-            paletteCdm.model = new go.GraphLinksModel([
+            //肉的数据
+            paletteMeat.model = new go.GraphLinksModel([
                 {
-                    key: "cdm",
+                    key: "Meat",
                     nodeType: 3,
                     nodeWidth: 50,
                     nodeHeight: 50,
                     imgWidth: 50,
                     imgHeight: 50,
-                    bgImage: "./images/cdm.png",
+                    bgImage: "./images/meat.png",
                     imgAlign: go.Spot.Center,
                     text: "",
                     textAlign: go.Spot.Center,
@@ -737,29 +737,29 @@
 <body onload="init()">
 <div id="sample">
     <div class="dialog">
-        <h3 class="dialog-title">资源申请</h3>
+        <h3 class="dialog-title">食物分类</h3>
         <div class="content clearfix">
             <div class="left-menu">
                 <ul class="menu-list">
                     <li class="menu-item">
-                        <h4 class="menu-title">容器</h4>
+                        <h4 class="menu-title">篮子</h4>
                         <div class="menu-content" id="myPaletteDiv" style="width: 112px; height: 86px;"></div>
                     </li>
                     <li class="menu-item">
-                        <h4 class="menu-title">计算</h4>
-                        <div class="menu-content" id="paletteCalc" style="width: 112px; height: 86px;"></div>
+                        <h4 class="menu-title">苹果</h4>
+                        <div class="menu-content" id="paletteApple" style="width: 112px; height: 86px;"></div>
                     </li>
                     <li class="menu-item">
-                        <h4 class="menu-title">存储</h4>
-                        <div class="menu-content" id="paletteStorage" style="width: 112px; height: 86px;"></div>
+                        <h4 class="menu-title">桃子</h4>
+                        <div class="menu-content" id="palettePeach" style="width: 112px; height: 86px;"></div>
                     </li>
                     <li class="menu-item">
-                        <h4 class="menu-title">容灾</h4>
-                        <div class="menu-content" id="paletteDister" style="width: 112px; height: 86px;"></div>
+                        <h4 class="menu-title">土豆</h4>
+                        <div class="menu-content" id="palettePotato" style="width: 112px; height: 86px;"></div>
                     </li>
                     <li class="menu-item">
-                        <h4 class="menu-title">CDM</h4>
-                        <div class="menu-content" id="paletteCdm" style="width: 112px; height: 86px;"></div>
+                        <h4 class="menu-title">肉</h4>
+                        <div class="menu-content" id="paletteMeat" style="width: 112px; height: 86px;"></div>
                     </li>
                 </ul>
             </div>
@@ -780,14 +780,13 @@
         { "class": "go.GraphLinksModel",
   "linkFromPortIdProperty": "fromPort",
   "linkToPortIdProperty": "toPort",
-  "modelData": {"position":"-382.75 -281.3786132812503"},
+  "modelData": {"position":"-334 -298.00000000000034"},
   "nodeDataArray": [
-{"key":-1024, "groupType":4, "text":"RAC集群", "isAdd":true, "category":"RacGroups", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-18.50000000000003 -248.00000000000028", "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":280, "height":110}},
-{"key":-2, "text":"容灾", "isAdd":true, "category":"OfGroups", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-17.5 55.99999999999997", "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":280, "height":110}},
-{"key":-3, "groupType":3, "text":"CDM", "isAdd":true, "category":"OfGroups", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-15.500000000000036 211.75722656249957", "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":280, "height":110}},
-{"key":-4, "groupType":0, "text":"计算", "isAdd":true, "category":"OfGroups", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-12.500000000000028 -214.62138671875027", "group":-1024, "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":280, "height":110}},
-{"key":-5, "groupType":1, "text":"存储", "isAdd":true, "category":"OfGroups", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-12.500000000000028 -94.62138671875029", "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":280, "height":110}, "group":-1024},
-{"key":-6, "groupType":2, "text":"容灾中的第二个容器", "isAdd":true, "showTitle":false, "borderWidth":0, "category":"OfGroups", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-12.5 60.99999999999997", "group":-2, "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":280, "height":80}}
+{"key":-1024, "groupType":4, "text":"水果", "isAdd":true, "category":"RacGroups", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-18.50000000000003 -248.00000000000028", "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":280, "height":110}},
+{"key":-2, "groupType":2, "text":"土豆", "isAdd":true, "category":"OfGroups", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-12.5 54.99999999999997", "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":280, "height":110}},
+{"key":-3, "groupType":3, "text":"肉", "isAdd":true, "category":"OfGroups", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-8.500000000000036 187.75722656249957", "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":280, "height":110}},
+{"key":-4, "groupType":0, "text":"苹果", "isAdd":true, "category":"OfGroups", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-12.500000000000028 -214.62138671875027", "group":-1024, "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":280, "height":110}},
+{"key":-5, "groupType":1, "text":"桃子", "isAdd":true, "category":"OfGroups", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-12.500000000000028 -94.62138671875029", "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":280, "height":110}, "group":-1024}
  ],
   "linkDataArray": [
 {"from":-1024, "to":-3, "fromPort":"L", "toPort":"L", "isAdd":true},
