@@ -187,9 +187,6 @@
                 return [
                     new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
                     {
-                        //左侧菜单水平位置
-                        //locationSpot: go.Spot.Center,
-
                         mouseEnter: function (e, obj) {
                             showPorts(obj.part, true);
                         },
@@ -279,7 +276,6 @@
 
                                 //间距
                                 spacing: new go.Size(4, 4),
-                                //isOngoing: false
                             }
                         ),
                     },
@@ -321,7 +317,6 @@
 
                             $(go.TextBlock,
                                 {
-                                    //alignment: go.Spot.Center,
                                     margin: 5,
                                     //文本不允许换行
                                     isMultiline: false,
@@ -333,8 +328,8 @@
                                 },
                                 new go.Binding("text", "text").makeTwoWay(),
                                 new go.Binding("font", "font").makeTwoWay()
-                            )//查API
-                        ), // end Horizontal Panel
+                            )
+                        ),
                         $(go.Placeholder,
                             {
                                 padding: 5,
@@ -369,9 +364,6 @@
 
                             //选中当前点击的节点
                             obj.part.isSelected = true;
-
-                            //获得当前选中的节点的信息
-                            //var info = obj.part.data;
                         },
 
                         layout: $(go.GridLayout,
@@ -423,7 +415,6 @@
                         $(go.Panel, "Table",
                             {
                                 stretch: go.GraphObject.Horizontal,
-                                //alignment: go.Spot.Center,
 
                                 //标题的背景颜色
                                 background: "#FFAA99"
