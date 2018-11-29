@@ -470,6 +470,7 @@
                         mouseDrop: function (e, node) {
                             finishDrop(e, node.containingGroup);
                         },
+
                         //当在节点上点击时会触发
                         click: function (e, obj) {
                             unSelectAllNode();
@@ -477,7 +478,12 @@
                             //选中当前点击的节点
                             obj.part.isSelected = true;
                         },
+
+                        //当鼠标移动到左侧菜单中的节点上时会触发
                         mouseEnter:function (e, obj) {
+
+                            //获得当前正在拖动的节点
+                            dragNode = node.part.data;
                         },
 
                     },
