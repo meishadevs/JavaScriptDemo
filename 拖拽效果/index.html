@@ -106,11 +106,10 @@
             function unSelectAllNode() {
 
                 //不选中左侧的节点
-                myPalette.findNodeForKey(-1024).isSelected = false;
-                paletteApple.findNodeForKey("Apple").isSelected = false;
-                palettePeach.findNodeForKey("Peach").isSelected = false;
-                palettePotato.findNodeForKey("Potato").isSelected = false;
-                paletteMeat.findNodeForKey("Meat").isSelected = false;
+                paletteApple.findNodeForKey("apple").isSelected = false;
+                palettePeach.findNodeForKey("peach").isSelected = false;
+                palettePotato.findNodeForKey("potato").isSelected = false;
+                paletteMeat.findNodeForKey("meat").isSelected = false;
             }
 
             /**
@@ -481,9 +480,6 @@
 
                         //当鼠标移动到左侧菜单中的节点上时会触发
                         mouseEnter:function (e, obj) {
-
-                            //获得当前正在拖动的节点
-                            dragNode = node.part.data;
                         },
 
                     },
@@ -584,32 +580,6 @@
                         linkDataArray: []
                     });
 
-
-            //左侧菜单
-            //初始化调色版
-            myPalette = $(go.Palette, "myPaletteDiv",
-                {
-                    groupTemplateMap: myDiagram.groupTemplateMap,
-                    contentAlignment: go.Spot.Center,
-                    layout: $(go.GridLayout,
-                        {
-                            wrappingColumn: 1,
-                            alignment: go.GridLayout.Position
-                        })
-                });
-
-            //容器节点的数据
-            myPalette.model = new go.GraphLinksModel([
-                {
-                    key: -1024,
-                    text: "篮子",
-                    category: "OfGroups",
-                    isGroup: "true",
-                    font: "bold 13px sans-serif",
-                    isAdd: false
-                }
-            ]);
-
             //苹果
             paletteApple =
                 $(go.Palette, "paletteApple",
@@ -622,7 +592,7 @@
             //苹果的数据
             paletteApple.model = new go.GraphLinksModel([
                 {
-                    key: "Apple",
+                    key: "apple",
                     nodeType: 0,
                     nodeWidth: 46,
                     nodeHeight: 50,
@@ -649,7 +619,7 @@
             //桃子的数据
             palettePeach.model = new go.GraphLinksModel([
                 {
-                    key: "Peach",
+                    key: "peach",
                     nodeType: 1,
                     nodeWidth: 46,
                     nodeHeight: 50,
@@ -675,7 +645,7 @@
             //土豆的数据
             palettePotato.model = new go.GraphLinksModel([
                 {
-                    key: "Potato",
+                    key: "potato",
                     nodeType: 2,
                     nodeWidth: 50,
                     nodeHeight: 50,
@@ -701,7 +671,7 @@
             //肉的数据
             paletteMeat.model = new go.GraphLinksModel([
                 {
-                    key: "Meat",
+                    key: "meat",
                     nodeType: 3,
                     nodeWidth: 50,
                     nodeHeight: 50,
@@ -748,28 +718,24 @@
             <div class="left-menu">
                 <ul class="menu-list">
                     <li class="menu-item">
-                        <h4 class="menu-title">篮子</h4>
-                        <div class="menu-content" id="myPaletteDiv" style="width: 112px; height: 86px;"></div>
-                    </li>
-                    <li class="menu-item">
                         <h4 class="menu-title">苹果</h4>
-                        <div class="menu-content" id="paletteApple" style="width: 112px; height: 86px;"></div>
+                        <div class="menu-content" id="paletteApple" style="width: 112px; height: 103px;"></div>
                     </li>
                     <li class="menu-item">
                         <h4 class="menu-title">桃子</h4>
-                        <div class="menu-content" id="palettePeach" style="width: 112px; height: 86px;"></div>
+                        <div class="menu-content" id="palettePeach" style="width: 112px; height: 103px;"></div>
                     </li>
                     <li class="menu-item">
                         <h4 class="menu-title">土豆</h4>
-                        <div class="menu-content" id="palettePotato" style="width: 112px; height: 86px;"></div>
+                        <div class="menu-content" id="palettePotato" style="width: 112px; height: 103px;"></div>
                     </li>
                     <li class="menu-item">
                         <h4 class="menu-title">肉</h4>
-                        <div class="menu-content" id="paletteMeat" style="width: 112px; height: 86px;"></div>
+                        <div class="menu-content" id="paletteMeat" style="width: 112px; height: 103px;"></div>
                     </li>
                 </ul>
             </div>
-            <div class="right-content" id="myDiagramDiv" style="width: 872px; height: 615px;float: left"></div>
+            <div class="right-content" id="myDiagramDiv" style="width: 872px; height: 560px;float: left"></div>
         </div>
     </div>
     <span style="display: inline-block; vertical-align: top;">
