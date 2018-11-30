@@ -21,7 +21,7 @@
             //当groupType值为1时，表示存放桃子的篮子
             //当groupType值为2时，表示存放土豆的篮子
             //当groupType值为3时，表示存放肉的篮子
-            //当groupType值为时，表示存放水果的篮子
+            //当groupType值为4时，表示存放水果的篮子
             var arrayText = ["苹果", "桃子", "土豆", "肉"];
 
             //组的类型
@@ -240,7 +240,6 @@
                         //(必须)用于将节点可以拖出组容器之外，false为拖不出组容器之外
                         computesBoundsAfterDrag: true,
                         computesBoundsIncludingLocation: true,
-                        //movable: false,
                         mouseDrop: function (e, obj) {
                             finishDrop(e, obj);
                         },
@@ -324,7 +323,7 @@
                                     opacity: 0.75,
 
                                     //标题的字体颜色
-                                    stroke: "#404040"//标题字体颜色
+                                    stroke: "#404040"
                                 },
                                 new go.Binding("text", "text").makeTwoWay(),
                                 new go.Binding("font", "font").makeTwoWay()
@@ -344,7 +343,7 @@
                     makePort("L", go.Spot.Left, true, true),
                     makePort("R", go.Spot.Right, true, true),
                     makePort("B", go.Spot.Bottom, true, true)
-                ));//(大组模板)
+                ));
 
             //添加一个组，组的名称为RacGroups（大组模板）
             myDiagram.groupTemplateMap.add("RacGroups",
@@ -454,7 +453,7 @@
             //定义节点模板
             myDiagram.nodeTemplate =
                 //定义模板的类型
-                $(go.Node, "Auto",//查API
+                $(go.Node, "Auto",
                     {
                         //当节点放入组中时，调用此方法
                         mouseDrop: function (e, node) {
@@ -542,7 +541,7 @@
                             stroke: "transparent",
                             name: "HIGHLIGHT"
                         }),
-                    $(go.Shape,  // the link path shape
+                    $(go.Shape,
                         {
                             isPanelMain: true,
                             stroke: "gray",
@@ -745,15 +744,15 @@
   "linkToPortIdProperty": "toPort",
   "modelData": {"position":"-334 -298.00000000000034"},
   "nodeDataArray": [
-{"key":-1024, "groupType":4, "text":"水果", "isAdd":true, "category":"RacGroups", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-18.50000000000003 -248.00000000000028", "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":285, "height":110}},
-{"key":-2, "groupType":2, "text":"土豆", "isAdd":true, "category":"OfGroups", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-12.5 54.99999999999997", "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":285, "height":110}},
-{"key":-3, "groupType":3, "text":"肉", "isAdd":true, "category":"OfGroups", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-8.500000000000036 187.75722656249957", "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":285, "height":110}},
-{"key":-4, "groupType":0, "text":"苹果", "isAdd":true, "category":"OfGroups", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-12.500000000000028 -214.62138671875027", "group":-1024, "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":285, "height":110}},
-{"key":-5, "groupType":1, "text":"桃子", "isAdd":true, "category":"OfGroups", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-12.500000000000028 -94.62138671875029", "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":285, "height":110}, "group":-1024}
+{"key":"fruitBasket", "groupType":4, "text":"水果", "isAdd":true, "category":"RacGroups", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-18.50000000000003 -248.00000000000028", "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":285, "height":110}},
+{"key":"potatoBasket", "groupType":2, "text":"土豆", "isAdd":true, "category":"OfGroups", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-12.5 54.99999999999997", "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":285, "height":110}},
+{"key":"meatBasket", "groupType":3, "text":"肉", "isAdd":true, "category":"OfGroups", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-8.500000000000036 187.75722656249957", "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":285, "height":110}},
+{"key":"appleBasket", "groupType":0, "text":"苹果", "isAdd":true, "category":"OfGroups", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-12.500000000000028 -214.62138671875027", "group":"fruitBasket", "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":285, "height":110}},
+{"key":"peachBasket", "groupType":1, "text":"桃子", "isAdd":true, "category":"OfGroups", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-12.500000000000028 -94.62138671875029", "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":285, "height":110}, "group":"fruitBasket"}
  ],
   "linkDataArray": [
-{"from":-1024, "to":-3, "fromPort":"L", "toPort":"L", "isAdd":true},
-{"from":-1024, "to":-2, "fromPort":"B", "toPort":"T", "isAdd":true}
+{"from":"fruitBasket", "to":"meatBasket", "fromPort":"L", "toPort":"L", "isAdd":true},
+{"from":"fruitBasket", "to":"potatoBasket", "fromPort":"B", "toPort":"T", "isAdd":true}
  ]}
     </textarea>
 </div>
