@@ -57,11 +57,15 @@
                     //当将节点拖入右侧图表绘制区并松开鼠标时会触发mouseDrop
                     mouseDrop: function (e, obj) {
 
-                        //isAdd表示当前选中的节点是否添加到了容器中已经标记当前选中的容器是否添加到了容器中
+                        //isAdd用于标记当前选中的节点是否添加到了容器中
+                        //如果isAdd为true，表示节点添加到了容器中
+                        //如果isAdd为false，表示节点没有添加到容器中
                         var isAdd = e.diagram.selection.Th.value.data.isAdd;
 
-                        //如果节点没有添加到容器中或者容器没有添加到容器中
+                        //如果节点没有添加到对应的容器中
                         if (!isAdd) {
+
+                            //删除当前选中的节点
                             myDiagram.commandHandler.deleteSelection();
                         }
                     },
@@ -230,8 +234,8 @@
                     });
             }
 
-            //添加一个组，组的名称为OfGroups（大组模板）
-            myDiagram.groupTemplateMap.add("OfGroups",
+            //在图表上添加一个篮子模板
+            myDiagram.groupTemplateMap.add("basket",
                 $(go.Group, "Auto",
                     {
                         name: "Groups",
@@ -345,8 +349,8 @@
                     makePort("B", go.Spot.Bottom, true, true)
                 ));
 
-            //添加一个组，组的名称为RacGroups（大组模板）
-            myDiagram.groupTemplateMap.add("RacGroups",
+            //在图表上添加一个水果篮子模板
+            myDiagram.groupTemplateMap.add("fruitBasket",
                 $(go.Group, "Auto",
                     {
                         name: "Groups",
@@ -432,8 +436,8 @@
                                 },
                                 new go.Binding("text", "text").makeTwoWay(),
                                 new go.Binding("font", "font").makeTwoWay()
-                            )//查API
-                        ), // end Horizontal Panel
+                            )
+                        ),
                         $(go.Placeholder,
                             {
                                 padding: 5,
@@ -448,10 +452,11 @@
                     makePort("L", go.Spot.Left, true, true),
                     makePort("R", go.Spot.Right, true, true),
                     makePort("B", go.Spot.Bottom, true, true)
-                ));//(大组模板)
+                ));
 
             //定义节点模板
             myDiagram.nodeTemplate =
+
                 //定义模板的类型
                 $(go.Node, "Auto",
                     {
@@ -508,7 +513,7 @@
                         new go.Binding("text", "text").makeTwoWay(),
                         new go.Binding("alignment", "textAlign")
                     )
-                );//end nodeTemplate
+                );
 
             //连线模板
             myDiagram.linkTemplate =
@@ -744,11 +749,11 @@
   "linkToPortIdProperty": "toPort",
   "modelData": {"position":"-334 -298.00000000000034"},
   "nodeDataArray": [
-{"key":"fruitBasket", "groupType":4, "text":"水果", "isAdd":true, "category":"RacGroups", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-18.50000000000003 -248.00000000000028", "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":285, "height":110}},
-{"key":"potatoBasket", "groupType":2, "text":"土豆", "isAdd":true, "category":"OfGroups", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-12.5 54.99999999999997", "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":285, "height":110}},
-{"key":"meatBasket", "groupType":3, "text":"肉", "isAdd":true, "category":"OfGroups", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-8.500000000000036 187.75722656249957", "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":285, "height":110}},
-{"key":"appleBasket", "groupType":0, "text":"苹果", "isAdd":true, "category":"OfGroups", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-12.500000000000028 -214.62138671875027", "group":"fruitBasket", "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":285, "height":110}},
-{"key":"peachBasket", "groupType":1, "text":"桃子", "isAdd":true, "category":"OfGroups", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-12.500000000000028 -94.62138671875029", "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":285, "height":110}, "group":"fruitBasket"}
+{"key":"fruitBasket", "groupType":4, "text":"水果", "isAdd":true, "category":"fruitBasket", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-18.50000000000003 -248.00000000000028", "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":285, "height":110}},
+{"key":"potatoBasket", "groupType":2, "text":"土豆", "isAdd":true, "category":"basket", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-12.5 54.99999999999997", "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":285, "height":110}},
+{"key":"meatBasket", "groupType":3, "text":"肉", "isAdd":true, "category":"basket", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-8.500000000000036 187.75722656249957", "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":285, "height":110}},
+{"key":"appleBasket", "groupType":0, "text":"苹果", "isAdd":true, "category":"basket", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-12.500000000000028 -214.62138671875027", "group":"fruitBasket", "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":285, "height":110}},
+{"key":"peachBasket", "groupType":1, "text":"桃子", "isAdd":true, "category":"basket", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-12.500000000000028 -94.62138671875029", "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":285, "height":110}, "group":"fruitBasket"}
  ],
   "linkDataArray": [
 {"from":"fruitBasket", "to":"meatBasket", "fromPort":"L", "toPort":"L", "isAdd":true},
