@@ -252,15 +252,6 @@
                         click: function (e, obj) {
                             unSelectAllNode();
 
-                            //选中当前点击的节点
-
-                            if (obj.data.key === -6) {
-                                obj.part.isSelected = false;
-                                myDiagram.findNodeForKey(-2).isSelected = true;
-                            } else {
-                                obj.part.isSelected = true;
-                            }
-
                             //获得当前选中的节点的信息
                             var info = obj.part.data;
                         },
@@ -523,10 +514,10 @@
                         curve: go.Link.JumpOver,
                         toEndSegmentLength: 50,
                         corner: 5,
-                        relinkableFrom: true,//待查
-                        relinkableTo: true,//待查
-                        reshapable: true,//待查
-                        resegmentable: true,//待查
+                        relinkableFrom: true,
+                        relinkableTo: true,
+                        reshapable: true,
+                        resegmentable: true,
 
                         mouseEnter: function (e, link) {
                             link.findObject("HIGHLIGHT").stroke = "rgba(30,144,255,0.2)";
@@ -681,7 +672,7 @@
             ]);
 
             load();
-        }//end init()
+        }
 
         function save() {
             saveDiagramProperties();
