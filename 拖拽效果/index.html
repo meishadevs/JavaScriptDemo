@@ -192,8 +192,6 @@
                     new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
                     {
                         mouseEnter: function (e, obj) {
-                            //获得当前正在拖动的节点
-                            dragNode = obj.part.data;
                             showPorts(obj.part, true);
                         },
 
@@ -384,30 +382,6 @@
 
                             //选中当前点击的节点
                             obj.part.isSelected = true;
-                        },
-
-                        //当节点进入组时触发
-                        mouseDragEnter: function (e, grp) {
-
-
-                            //获得当前正在拖动的节点的节点类型
-                            var nodeType = dragNode.nodeType;
-
-                            //获得当前节点拖入的组的组类型
-                            var groupType = grp.part.data.groupType;
-
-                            console.log("nodeType:", nodeType);
-                            console.log("groupType:", groupType);
-
-                            //如果节点不属于这个组
-                            if (nodeType !== groupType) {
-                                document.querySelector("#myDiagramDiv canvas").style.cursor = "not-allowed";
-                            }
-                        },
-
-                        //当节点离开组时触发
-                        mouseDragLeave: function (e, obj) {
-                            document.querySelector("#myDiagramDiv canvas").style.cursor = "copy";
                         },
 
                         layout: $(go.GridLayout,
