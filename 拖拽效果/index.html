@@ -37,13 +37,19 @@
             //在id属性值为"myDiagramDiv"的div标签上绘制图表
             myDiagram = $(go.Diagram, "myDiagramDiv",
                 {
-                    //允许使用ctrl+c、ctrl+v复制粘贴
-                    "commandHandler.copiesTree": true,
-
                     //允许左侧调色板中的节点拖入右侧图表绘制区
                     allowDrop: true,
 
+                    //禁止动画效果
                     "animationManager.isEnabled": false,
+
+                    initialContentAlignment: go.Spot.Center,
+
+                    //显示网格
+                    "grid.visible": true,
+
+                    //启动Ctrl+Z（撤销）、Ctrl+Y（恢复）
+                    "undoManager.isEnabled": true,
 
                     //使用网格
                     grid: $(go.Panel, "Grid",
@@ -68,12 +74,21 @@
                             //删除当前选中的节点
                             myDiagram.commandHandler.deleteSelection();
                         }
-                    },
-
-                    initialContentAlignment: go.Spot.Center,
-                    "grid.visible": true,
-                    "undoManager.isEnabled": true
+                    }
                 });
+
+            //屏蔽Ctrl+C（复制）、Ctrl+V（粘贴）、Ctrl+X（剪切）
+            myDiagram.commandHandler.doKeyDown = function() {
+                var e = myDiagram.lastInput;
+                var control = e.control || e.meta;
+                var key = e.key;
+
+                if (control && (key === 'C' || key === 'V' || key === 'X')) {
+                    return;
+                }
+
+                go.CommandHandler.prototype.doKeyDown.call(this);
+            }
 
             //当将节点拖动到右侧的图表绘制区会触发
             myDiagram.addDiagramListener("ExternalObjectsDropped", function (e) {
@@ -179,7 +194,7 @@
                         e.diagram.currentTool.doCancel();
                     }
 
-                    //如果节点拖到了组之外的其他地方
+                //如果节点拖到了组之外的其他地方
                 } else {
                     //将节点放入组之外的空白区域
                     var ok = e.diagram.commandHandler.addTopLevelParts(e.diagram.selection, true);
@@ -192,11 +207,11 @@
                     new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
                     {
                         mouseEnter: function (e, obj) {
-                            showPorts(obj.part, true);
+                            //showPorts(obj.part, true);
                         },
 
                         mouseLeave: function (e, obj) {
-                            showPorts(obj.part, false);
+                            //showPorts(obj.part, false);
                         }
                     }
                 ];
@@ -265,9 +280,6 @@
 
                             //获得当前节点拖入的组的组类型
                             var groupType = grp.part.data.groupType;
-
-                            console.log("nodeType:", nodeType);
-                            console.log("groupType:", groupType);
 
                             //如果节点不属于这个组
                             if (nodeType !== groupType) {
