@@ -207,11 +207,11 @@
                     new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
                     {
                         mouseEnter: function (e, obj) {
-                            //showPorts(obj.part, true);
+                            showPorts(obj.part, false);
                         },
 
                         mouseLeave: function (e, obj) {
-                            //showPorts(obj.part, false);
+                            showPorts(obj.part, false);
                         }
                     }
                 ];
