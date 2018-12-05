@@ -141,6 +141,12 @@
                 numPotato = 0;
                 numMeat = 0;
 
+                //获得放苹果的篮子
+                var appleBasket = myDiagram.findNodeForKey("appleBasket").data;
+
+                //获得放桃子的篮子
+                var peachBasket = myDiagram.findNodeForKey("peachBasket").data;
+
                 //遍历右侧图表绘制区
                 for (var i = 0; i < arr.length; i++) {
                     switch (arr[i].nodeType) {
@@ -163,6 +169,24 @@
                         default:
                             break;
                     }
+                }
+
+                //如果放苹果的篮子中有苹果
+                if (numApple > 0) {
+                    myDiagram.model.setDataProperty(appleBasket, "contentText", "");
+
+                //如果放苹果的篮子里没有苹果
+                } else {
+                    myDiagram.model.setDataProperty(appleBasket, "contentText", "苹果");
+                }
+
+                //如果放桃子的篮子中有桃子
+                if (numPeach > 0) {
+                    myDiagram.model.setDataProperty(peachBasket, "contentText", "");
+
+                //如果放桃子的篮子里没有桃子
+                } else {
+                    myDiagram.model.setDataProperty(peachBasket, "contentText", "桃子");
                 }
             }
 
@@ -327,6 +351,18 @@
                         new go.Binding("strokeWidth", "borderWidth")
                     ),
 
+                    //内容文本
+                    $(go.TextBlock,
+                        {
+                            margin: new go.Margin(0, 0, 0, 0),
+                            alignment: go.Spot.Center,
+                            isMultiline: false,
+                            font: "24px sans-serif",
+                            stroke: "#BFC0C1"
+                        },
+                        new go.Binding("text", "contentText").makeTwoWay()
+                    ),
+
                     $(go.Panel, "Vertical",
                         {
                             name: "PanelVertical",
@@ -343,6 +379,7 @@
                             },
                             new go.Binding("visible", "showTitle"),
 
+                            //标题文本
                             $(go.TextBlock,
                                 {
                                     margin: 5,
@@ -358,6 +395,7 @@
                                 new go.Binding("font", "font").makeTwoWay()
                             )
                         ),
+
                         $(go.Placeholder,
                             {
                                 padding: 5,
@@ -776,8 +814,8 @@
 {"key":"fruitBasket", "groupType":4, "titleText":"水果", "isAdd":true, "category":"fruitBasket", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-18.5 -248", "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":296, "height":110}},
 {"key":"potatoBasket", "groupType":2, "titleText":"土豆", "isAdd":true, "category":"basket", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-12.5 20", "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":285, "height":107}},
 {"key":"meatBasket", "groupType":3, "titleText":"肉", "isAdd":true, "category":"basket", "isGroup":"true", "font":"bold 13px sans-serif", "loc":"-12 150", "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":284, "height":107}},
-{"key":"appleBasket", "groupType":0, "titleText":"苹果", "isAdd":true, "category":"basket", "isGroup":"true", "group":"fruitBasket", "showTitle":false, "font":"bold 13px sans-serif", "loc":"-12.5 -214.6", "group":"fruitBasket", "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":285, "height":80}},
-{"key":"peachBasket", "groupType":1, "titleText":"桃子", "isAdd":true, "category":"basket", "isGroup":"true", "group":"fruitBasket", "showTitle":false, "font":"bold 13px sans-serif", "loc":"-12.5 -94.6", "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":285, "height":80}}
+{"key":"appleBasket", "groupType":0, "showTitle":false, "titleText":"苹果", "contentText":"苹果", "isAdd":true, "category":"basket", "isGroup":"true", "group":"fruitBasket", "font":"bold 13px sans-serif", "loc":"-12.5 -214.6", "group":"fruitBasket", "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":285, "height":80}},
+{"key":"peachBasket", "groupType":1, "showTitle":false, "titleText":"桃子", "contentText":"桃子", "isAdd":true, "category":"basket", "isGroup":"true", "group":"fruitBasket", "font":"bold 13px sans-serif", "loc":"-12.5 -94.6", "nodeHeight":{"class":"NaN"}, "textAlign":{"class":"go.Spot", "x":0.5, "y":1, "offsetX":0, "offsetY":0}, "pictrueMargin":{"class":"go.Margin", "top":-15, "right":0, "bottom":0, "left":0}, "minSize":{"class":"go.Size", "width":285, "height":80}}
  ],
   "linkDataArray": [
         {"from":"fruitBasket", "to":"meatBasket", "fromPort":"L", "toPort":"L", "isAdd":true},
