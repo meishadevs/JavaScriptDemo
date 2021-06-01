@@ -33,3 +33,4 @@
 - **[折线图](https://meishadevs.github.io/JavaScriptDemo/%E6%8A%98%E7%BA%BF%E5%9B%BE/)**
 - **[自动触发饼图](https://meishadevs.github.io/JavaScriptDemo/%E8%87%AA%E5%8A%A8%E8%A7%A6%E5%8F%91%E9%A5%BC%E5%9B%BE/)**
 - **[暂无数据的饼图](https://meishadevs.github.io/JavaScriptDemo/%E6%9A%82%E6%97%A0%E6%95%B0%E6%8D%AE%E7%9A%84%E9%A5%BC%E5%9B%BE/)**
+- **[扇形图](https://meishadevs.github.io/JavaScriptDemo/%E6%89%87%E5%BD%A2%E5%9B%BE/)**
