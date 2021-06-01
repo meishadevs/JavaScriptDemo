@@ -17,10 +17,10 @@
   <div id="main"></div>
   <script>
     let option = {
-      color: ['#3dd477', '#ffe347', '#00d2ff'],
+      color: ['#3dd477', '#ffe349', '#00d2ff'],
 
       title: {
-        text: ' ',
+        text: '',
         show: false
       },
 
@@ -30,15 +30,7 @@
       },
 
       legend: {
-        show: true,
-        orient: 'vertical',
-        top: '0',
-        right: '20',
-        textStyle: {
-          color: '#b7daf8',
-          fontSize: 14
-        },
-
+        show: false,
         data: ['华为', '苹果', '小米']
       },
 
@@ -46,37 +38,20 @@
         {
           name: '手机品牌',
           type: 'pie',
-          radius: ['65%', '90%'],
-          bottom: 60,
-          right: 86,
-          avoidLabelOverlap: false,
-          label: {
-            show: false,
-            position: 'center'
-          },
-
-          // 高亮扇区时的样式
-          emphasis: {
-            label: {
-              show: true,
-              fontSize: '16',
-              fontWeight: 'bold',
-              formatter: '{b}\n{d}%'
-            }
-          },
-
+          radius: ['70%', '90%'],
           labelLine: {
-            show: false
+            length: 20
           },
+          label: {
+            formatter: '{a|{b}\n{c}个}',
 
-          itemStyle: {
-            emphasis: {
-              shadowBlur: 10,
-              shadowOffsetX: 0,
-              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            rich: {
+              a: {
+                fontSize: 14,
+                color: '#f00'
+              }
             }
           },
-
           data: [
           {
               name: '华为',
