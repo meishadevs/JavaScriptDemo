@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>饼图</title>
+  <style>
+    #main {
+      width: 500px;
+      height: 320px;
+    }
+  </style>
+  <script src="./echarts.js"></script>
+</head>
+
+<body>
+  <div id="main"></div>
+  <script>
+    let option = {
+      textStyle: {
+        color: '#b7d8f8'
+      },
+
+      // 标题
+      title: {
+        text: '',
+        subtext: '',
+        textStyle: {
+          color: '#b7d8f8',
+          fontSize: 16
+        },
+
+        show: false,
+        textAlign: 'left',
+        top: '10%',
+        left: '5%'
+      },
+
+      grid: {
+        height: '55%',
+        top: '15%',
+        left: '5%',
+        right: '5%'
+      },
+
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow'
+        }
+      },
+
+      legend: {
+        show: false,
+        right: '10%',
+        textStyle: {
+          color: '#fff'
+        },
+        top: '10%',
+        data: ['']
+      },
+
+      // 横坐标
+      xAxis: {
+        type: 'category',
+
+        // 隐藏网格线
+        splitLine: {
+          show: false
+        },
+
+        // 隐藏坐标轴上的刻度
+        axisTick: {
+          show: false
+        },
+
+        // 隐藏坐标轴线
+        axisLine: {
+          show: false
+        },
+
+        axisLabel: {
+          formatter: function (value) {
+            let str = value.substring(0, 4)
+            return str.split('').join('\n')
+          },
+          textStyle: {
+            show: true,
+            color: '#b7daf8',
+            fontSize: 14
+          }
+        },
+
+        data: ['华为', '小米', '苹果']
+      },
+
+      // 纵坐标
+      yAxis: {
+        show: false
+      },
+
+      series: [
+        {
+          name: '',
+          type: 'bar',
+          barWidth: '15%',
+
+          label: {
+            show: false,
+            position: 'top'
+          },
+
+          itemStyle: {
+            normal: {
+              color: '#14c6ca',
+              barBorderRadius: [5, 5, 5, 5]
+            }
+          },
+
+          showBackground: true,
+          backgroundStyle: {
+            color: '#f00',
+            barBorderRadius: [5, 5, 5, 5]
+          },
+
+          data: [
+            {
+              name: '华为',
+              value: 300
+            },
+            {
+              name: '小米',
+              value: 200
+            },
+            {
+              name: '苹果',
+              value: 100
+            }
+          ]
+        }
+      ]
+    }
+
+    //绘制图表。
+    var myCharts = echarts.init(document.getElementById('main'));
+    myCharts.setOption(option);
+  </script>
+</body>
+
+</html>
