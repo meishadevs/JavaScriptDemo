@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>地图</title>
+    <style>
+        #main {
+            width: 1000px;
+            height: 900px;
+        }
+    </style>
+    <script src="./jquery.min.js"></script>
+    <script src="./echarts.min.js"></script>
+</head>
+
+<body>
+    <div id="main"></div>
+    <script>
+
+        // 获得地理数据的 url
+        var dataUrl = "./shenzhen.json";
+
+        var mapData = [
+            {
+                name: '罗湖区',
+                value: [114.0170, 22.5365]
+            },
+            {
+                name: '福田区',
+                value: [114.0080, 22.5340]
+            },
+            {
+                name: '盐田区',
+                value: [114.0265, 22.5385]
+            },
+            {
+                name: '大鹏新区',
+                value: [114.0435, 22.5400]
+            },
+            {
+                name: '坪山区',
+                value: [114.03362274169922, 22.544665679282357]
+            },
+            {
+                name: '龙岗区',
+                value: [114.02500, 22.546964536151943]
+            },
+            {
+                name: '龙华区',
+                value: [114.00581359863281, 22.545141307983233]
+            },
+            {
+                name: '光明区',
+                value: [113.99757385253906, 22.55227554179002]
+            },
+            {
+                name: '宝安区',
+                value: [113.99173736572266, 22.54260460263864]
+            },
+            {
+                name: '南山区',
+                value: [114.00025, 22.5350]
+            }
+        ]
+
+        var myChart = echarts.init(document.getElementById('main'));
+
+        $.get(dataUrl, (json) => {
+            // 注册地图
+            echarts.registerMap('sz', json);
+
+            var option = {
+                // 标题
+                title: {
+                    text: '手机品牌分布地图',
+                    left: 'center',
+
+                    textStyle: {
+                        fontSize: 28,
+                        fontWight: 300,
+                        fontFamily: 'Microsoft YaHei'
+                    }
+                },
+
+                tooltip: {
+                    trigger: 'item'
+                },
+
+                // 地理坐标系组件
+                geo: {
+                    map: 'sz',
+                    zoom: 1.2,
+
+                    label: {
+                        show: false
+                    },
+
+                    itemStyle: {
+                        areaColor: 'rgba(4,73,128, 1)',
+
+                        // 设置外层边框
+                        borderWidth: 2,
+                        borderColor: 'rgba(34,216,255, 1)',
+                        shadowColor: 'rgba(34,216,255, 1)', // #044B4D
+                        shadowOffsetY: 7,
+                        shadowOffsetX: 7,
+                        shadowBlur: 6
+                    }
+                },
+
+                series: [
+                    {
+                        // 图表的类型为散点图（地图上的黄色旗子）
+                        type: 'scatter',
+                        name: 'hasProperty',
+
+                        // 采用的坐标系为地理坐标系
+                        coordinateSystem: 'geo',
+
+                        // 散点图上点的大小（旗子的大小）
+                        symbolSize: 20,
+
+                        // 标记的图形
+                        symbol: function (value, params) {
+                            return 'image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAABh0lEQVQ4jdXVvWtVQRDG4SdREIJgEwuJBi3URlBEiYUWKgSDhVgrFhb5BwIWipWNvRDETkhQAmlSplACQRKIjQoWIgh+FBokGj8IiiOLc8MlnJv7wW18YWDZd+a35+zZMytCKzEZISIMtpivV3saxdZWKlpKqtMNnMc4nuNXWj/wAV86BRcdwb0G3ju8xbN2t6KZduMEHnQbXHQfc90Gr2CsDLoN3oEDnYDnm/g9uFO47YIv4TIWsIzVipxjuNrJcZvMqFI/9mOgE/BmWs7o+sdb1/8H3rjHgziX/WAfRhrUncK1bERLmMW3qq24mGf0De7iZI4b6TN+4wqm8REP84H+KcLtbOJ/IoxH2FvRuBs1+p4IQxEepb8W4ULxirmSky83uRGa3SD96ZeYqYFv1k1ORDhcUXgmwmiE7Rvmt0QYjvAk639GGCleeZWis7iO0/m/v8dTvM5x/a+7E7twEMez8axhCrfwqiTVwDUN5CJHcQh7EtSHbfie19CnXPQFFvEYX9cp+As8wAD9SbJQaQAAAABJRU5ErkJggg=='
+                        },
+
+                        // 区名称的样式
+                        label: {
+                            show: true,
+                            formatter: '{b}',
+                            position: 'bottom',
+                            color: '#fff',
+                            fontSize: 14
+                        },
+
+                        itemStyle: {
+                            color: '#ddb926'
+                        },
+
+                        tooltip: {
+                            show: false
+                        },
+
+                        data: this.mapData
+                    },
+                    {
+                        // 图表类型为地图
+                        type: 'map',
+
+                        // 使用 registerMap 注册的地图名称
+                        mapType: 'sz',
+
+                        // 地图缩放比例
+                        zoom: 1.2,
+
+                        // 提示框
+                        tooltip: {
+                            triggerOn: 'mousemove',
+                            backgroundColor: 'rgba(8, 8, 8, .85)',
+                            textStyle: {
+                                color: '#fff',
+                                fontSize: 16
+                            },
+
+                            // 处理悬浮提示
+                            formatter: (params) => {
+                                return (
+                                    params.name + '<br/>' +
+                                    '苹果：' + 10 + '<br/>' +
+                                    '华为：' + 20 + '<br/>' +
+                                    '小米：' + 30 + '<br/>' +
+                                    '三星：' + 40 + '<br/>'
+                                )
+                            }
+                        },
+
+                        // 标签的样式
+                        label: {
+
+                            // 标签在默认状态下的样式
+                            normal: {
+                                show: false
+                            },
+
+                            // 标签在高亮状态下的样式
+                            emphasis: {
+                                show: false
+                            }
+                        },
+
+                        // 选中状态下的样式
+                        select: {
+                            // 标签在选中状态下的样式
+                            label: {
+                                show: false
+                            },
+
+                            // 选中状态下地图上区域块的样式
+                            itemStyle: {
+                                areaColor: '#2b8bf3'
+                            }
+                        },
+
+                        // 地图上区域块的样式
+                        itemStyle: {
+                            // 默认状态下地图的颜色
+                            normal: {
+                                areaColor: '#083288',
+                                borderColor: 'rgba(0, 210, 255, 1)', // #00d2ff
+                                borderWidth: 2,
+                                color: '#fff'
+                            },
+
+                            // 选中状态下地图的颜色
+                            emphasis: {
+                                areaColor: '#2b8bf3',
+                            }
+                        }
+                    }
+                ]
+            };
+
+            myChart.setOption(option);
+        });
+    </script>
+</body>
+
+</html>
