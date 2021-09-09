@@ -5,8 +5,19 @@
     <meta charset="UTF-8">
     <title>地图</title>
     <style>
-        #main {
+        .container {
             width: 1000px;
+            margin: 0 auto;
+        }
+
+        .container .title {
+            font-size: 28px;
+            font-weight: 300;
+            font-family: 'Microsoft YaHei';
+            text-align: center;
+        }
+
+        .container .main {
             height: 900px;
         }
     </style>
@@ -15,7 +26,10 @@
 </head>
 
 <body>
-    <div id="main"></div>
+    <div class="container">
+        <div class="title">手机品牌分布地图</div>
+        <div class="main"></div>
+    </div>
     <script>
 
         // 获得地理数据的 url
@@ -70,7 +84,7 @@
 
         // 手机列表
         var cellPhoneList = [
-        {
+            {
                 name: '南昌市',
                 apple: 10,
                 samsung: 20,
@@ -149,7 +163,7 @@
             }
         ];
 
-        var myChart = echarts.init(document.getElementById('main'));
+        var myChart = echarts.init(document.querySelector('.main'));
 
         var appleDom = '<span style="width:10px;height:10px;margin-right:5px;background-color:#fff94f;border-radius:50%;display:inline-block;"></span>'
         var samsungDom = '<span style="width:10px;height:10px;margin-right:5px;background-color:#2b8bf3;border-radius:50%;display:inline-block;"></span>'
@@ -163,14 +177,7 @@
             var option = {
                 // 标题
                 title: {
-                    text: '手机品牌分布地图',
-                    left: 'center',
-
-                    textStyle: {
-                        fontSize: 28,
-                        fontWight: 300,
-                        fontFamily: 'Microsoft YaHei'
-                    }
+                    show: false
                 },
 
                 tooltip: {
