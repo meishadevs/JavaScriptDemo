@@ -66,9 +66,95 @@
                 name: '上饶市',
                 value: [117.8, 28.7]
             }
-        ]
+        ];
+
+        // 手机列表
+        var cellPhoneList = [
+        {
+                name: '南昌市',
+                apple: 10,
+                samsung: 20,
+                xiaomi: 30,
+                huawei: 40
+            },
+            {
+                name: '景德镇市',
+                apple: 40,
+                samsung: 30,
+                xiaomi: 20,
+                huawei: 10
+            },
+            {
+                name: '萍乡市',
+                apple: 40,
+                samsung: 10,
+                xiaomi: 20,
+                huawei: 30
+            },
+            {
+                name: '九江市',
+                apple: 40,
+                samsung: 10,
+                xiaomi: 30,
+                huawei: 20
+            },
+            {
+                name: '新余市',
+                apple: 40,
+                samsung: 20,
+                xiaomi: 10,
+                huawei: 30
+            },
+            {
+                name: '鹰潭市',
+                apple: 40,
+                samsung: 20,
+                xiaomi: 30,
+                huawei: 10
+            },
+            {
+                name: '赣州市',
+                apple: 10,
+                samsung: 30,
+                xiaomi: 20,
+                huawei: 40
+            },
+            {
+                name: '吉安市',
+                apple: 10,
+                samsung: 40,
+                xiaomi: 30,
+                huawei: 20
+            },
+            {
+                name: '宜春市',
+                apple: 30,
+                samsung: 20,
+                xiaomi: 10,
+                huawei: 40
+            },
+            {
+                name: '抚州市',
+                apple: 30,
+                samsung: 40,
+                xiaomi: 20,
+                huawei: 10
+            },
+            {
+                name: '上饶市',
+                apple: 30,
+                samsung: 10,
+                xiaomi: 20,
+                huawei: 40
+            }
+        ];
 
         var myChart = echarts.init(document.getElementById('main'));
+
+        var appleDom = '<span style="width:10px;height:10px;margin-right:5px;background-color:#fff94f;border-radius:50%;display:inline-block;"></span>'
+        var samsungDom = '<span style="width:10px;height:10px;margin-right:5px;background-color:#2b8bf3;border-radius:50%;display:inline-block;"></span>'
+        var xiaomiDom = '<span style="width:10px;height:10px;margin-right:5px;background-color:#3dd477;border-radius:50%;display:inline-block;"></span>'
+        var huaweiDom = '<span style="width:10px;height:10px;margin-right:5px;background-color:#f00;border-radius:50%;display:inline-block;"></span>'
 
         $.get(dataUrl, (json) => {
             // 注册地图
@@ -172,11 +258,11 @@
                             // 处理悬浮提示
                             formatter: (params) => {
                                 return (
-                                    params.name + '<br/>' +
-                                    '苹果：' + 10 + '<br/>' +
-                                    '华为：' + 20 + '<br/>' +
-                                    '小米：' + 30 + '<br/>' +
-                                    '三星：' + 40 + '<br/>'
+                                    params.data.name + '<br/>' +
+                                    appleDom + '苹果：' + params.data.apple + '<br/>' +
+                                    huaweiDom + '华为：' + params.data.huawei + '<br/>' +
+                                    xiaomiDom + '小米：' + params.data.xiaomi + '<br/>' +
+                                    samsungDom + '三星：' + params.data.samsung + '<br/>'
                                 )
                             }
                         },
@@ -222,7 +308,9 @@
                             emphasis: {
                                 areaColor: '#2b8bf3',
                             }
-                        }
+                        },
+
+                        data: cellPhoneList
                     }
                 ]
             };
